@@ -11,7 +11,6 @@ import FAQ from './components/FAQ';
 import Offer from './components/Offer';
 import Footer from './components/Footer';
 import Chatbot from './components/Chatbot';
-import { Analytics } from '@vercel/analytics/react';
 
 function App() {
   return (
@@ -28,7 +27,6 @@ function App() {
       <FAQ />
       <Footer />
       <Chatbot />
-      <Analytics />
     </div>
   );
 }
