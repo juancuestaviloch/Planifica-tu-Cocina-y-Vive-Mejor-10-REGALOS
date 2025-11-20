@@ -93,7 +93,7 @@ const SavingsCalculator: React.FC = () => {
                       <input 
                         type="range" 
                         min="2000" 
-                        max="30000" 
+                        max="100000" 
                         step="500" 
                         value={deliveryCost} 
                         onChange={(e) => setDeliveryCost(Number(e.target.value))}
