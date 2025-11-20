@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { MAIN_PRODUCT, CHECKOUT_URL } from '../constants';
@@ -31,16 +32,16 @@ const StickyCTA: React.FC = () => {
         <div className="flex items-center gap-4 w-full md:w-auto justify-between md:justify-end">
             <div className="flex flex-col items-start md:items-end">
                 <span className="text-gray-400 text-xs line-through decoration-red-400">${MAIN_PRODUCT.originalPrice.toLocaleString('es-AR')}</span>
-                <div className="flex items-baseline gap-1">
+                <div className="flex items-baseline gap-2">
                     <span className="text-brand-600 font-bold text-xl">${MAIN_PRODUCT.price.toLocaleString('es-AR')}</span>
-                    <span className="text-gray-500 text-xs font-bold">ARS</span>
+                    <span className="text-[10px] bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded font-bold whitespace-nowrap">3 Cuotas s/int</span>
                 </div>
             </div>
             <a 
                 href={CHECKOUT_URL}
                 target="_blank"
                 rel="noopener noreferrer" 
-                className="bg-accent-500 hover:bg-accent-600 text-white text-sm md:text-base font-bold py-2 px-6 rounded-full shadow-md hover:shadow-lg transition flex items-center gap-2"
+                className="bg-accent-500 hover:bg-accent-600 text-white text-sm md:text-base font-bold py-2 px-6 rounded-full shadow-md hover:shadow-lg transition flex items-center gap-2 whitespace-nowrap"
             >
                 Comprar Ahora <ArrowRight className="w-4 h-4" />
             </a>

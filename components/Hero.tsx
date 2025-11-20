@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { ArrowRight, Star, Users, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Star, CreditCard, ShieldCheck, Zap, Banknote } from 'lucide-react';
 import { CHECKOUT_URL } from '../constants';
 
 const Hero: React.FC = () => {
@@ -81,12 +81,21 @@ const Hero: React.FC = () => {
         </div>
       </div>
       
-      {/* Trust Bar */}
+      {/* Trust Bar - CRO Optimized: Payment methods upfront */}
       <div className="bg-white py-8 border-y border-gray-100">
-         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-center gap-8 md:gap-16 opacity-50 grayscale">
-            <div className="flex items-center gap-2"><Users className="w-5 h-5"/> Acceso Inmediato</div>
-            <div className="flex items-center gap-2"><Star className="w-5 h-5"/> Garantía 7 Días</div>
-            <div className="flex items-center gap-2"><ShieldCheck className="w-5 h-5"/> Pago Seguro</div>
+         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap justify-center items-center gap-x-8 gap-y-4 md:gap-12 text-gray-700">
+            <div className="flex items-center gap-2.5 font-medium bg-blue-50 px-4 py-2 rounded-full border border-blue-100">
+                <CreditCard className="w-5 h-5 text-blue-600"/> 
+                <span>Hasta 3 Cuotas <span className="font-bold text-blue-700">Sin Interés</span></span>
+            </div>
+            <div className="flex items-center gap-2.5 font-medium bg-green-50 px-4 py-2 rounded-full border border-green-100">
+                <Banknote className="w-5 h-5 text-green-600"/> 
+                <span><span className="font-bold text-green-700">10% OFF</span> Transferencia</span>
+            </div>
+            <div className="flex items-center gap-2.5 font-medium">
+                <Zap className="w-5 h-5 text-accent-500 fill-current"/> 
+                <span className="text-sm md:text-base">Entrega inmediata por Email</span>
+            </div>
          </div>
       </div>
     </header>

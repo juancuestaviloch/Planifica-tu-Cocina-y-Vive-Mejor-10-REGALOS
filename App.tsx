@@ -20,6 +20,7 @@ import Transformation from './components/Transformation';
 import InsideLook from './components/InsideLook';
 import SavingsCalculator from './components/SavingsCalculator';
 import ComparisonTable from './components/ComparisonTable';
+import ExitIntentModal from './components/ExitIntentModal';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
       <UrgencyBar />
       <StickyCTA />
       <SocialProofToast />
+      <ExitIntentModal />
       
       {/* FASE 1: ENGANCHE Y PROBLEMA */}
       <Hero />

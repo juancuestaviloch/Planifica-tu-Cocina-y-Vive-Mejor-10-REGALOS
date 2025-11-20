@@ -1,6 +1,7 @@
+
 import React from 'react';
 import { MAIN_PRODUCT, BONUSES, CHECKOUT_URL } from '../constants';
-import { Check, ArrowRight, Lock, Book, Smartphone, Tablet } from 'lucide-react';
+import { Check, ArrowRight, Lock, Book, Smartphone, Tablet, CreditCard, Mail, Wallet, Banknote } from 'lucide-react';
 
 const Offer: React.FC = () => {
   return (
@@ -91,6 +92,28 @@ const Offer: React.FC = () => {
                         <span className="text-6xl font-extrabold text-brand-600">${MAIN_PRODUCT.price.toLocaleString('es-AR')}</span>
                         <span className="text-xl text-gray-500 font-bold">ARS</span>
                       </div>
+                      
+                      <div className="mt-4 mb-2 flex flex-col gap-2 items-center w-full">
+                          <div className="flex items-center justify-center gap-2 bg-blue-50 text-blue-800 px-3 py-2 rounded-md font-bold text-sm border border-blue-100 w-full shadow-sm">
+                              <CreditCard className="w-4 h-4 text-blue-600" />
+                              3 Cuotas Sin Interés
+                          </div>
+                          <div className="flex items-center justify-center gap-2 bg-green-50 text-green-800 px-3 py-2 rounded-md border border-green-100 w-full shadow-sm">
+                             <Banknote className="w-4 h-4 text-green-600" />
+                             <span className="font-bold text-sm">10% OFF con Transferencia</span>
+                          </div>
+                      </div>
+
+                      <div className="text-center mb-2 text-[10px] text-gray-500">
+                         <p className="mb-1 font-medium">Aceptamos todos los medios de pago:</p>
+                         <div className="flex flex-wrap justify-center gap-1 font-semibold text-gray-600">
+                             <span className="bg-white border border-gray-200 px-2 py-1 rounded shadow-sm">Tarjeta Crédito</span>
+                             <span className="bg-white border border-gray-200 px-2 py-1 rounded shadow-sm">Débito</span>
+                             <span className="bg-white border border-gray-200 px-2 py-1 rounded shadow-sm">Mercado Pago</span>
+                             <span className="bg-white border border-gray-200 px-2 py-1 rounded shadow-sm">Transferencia</span>
+                         </div>
+                      </div>
+
                       <p className="text-green-600 text-sm font-bold mt-2">¡Ahorras ${(MAIN_PRODUCT.originalPrice - MAIN_PRODUCT.price).toLocaleString('es-AR')} ARS!</p>
                   </div>
                   
@@ -100,19 +123,29 @@ const Offer: React.FC = () => {
                     rel="noopener noreferrer"
                     className="w-full bg-accent-500 hover:bg-accent-600 text-white font-bold text-lg py-4 px-4 rounded-xl shadow-xl transform transition hover:-translate-y-1 flex flex-col items-center justify-center gap-1 mb-4 animate-pulse group"
                   >
-                    <span className="flex items-center gap-2">DESCARGAR AHORA <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition" /></span>
+                    <span className="flex items-center gap-2">QUIERO ACCESO INMEDIATO <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition" /></span>
                   </a>
 
-                  <div className="flex flex-col items-center gap-4 text-xs text-gray-500 mt-4">
+                  <div className="flex flex-col items-center gap-4 text-xs text-gray-500 mt-2 w-full">
+                    <div className="bg-yellow-50/80 p-3 rounded-lg border border-yellow-100 w-full text-center">
+                         <p className="flex items-center justify-center gap-2 text-gray-800 font-bold mb-1">
+                             <Mail className="w-4 h-4 text-accent-600" />
+                             Envío Automático e Inmediato
+                         </p>
+                         <p className="leading-tight text-gray-600 text-[11px]">
+                             El eBook llega a tu casilla de email <strong>al instante</strong> de confirmarse el pago.
+                         </p>
+                    </div>
+
                     <div className="flex items-center gap-2 bg-white px-3 py-1 rounded-full border border-gray-200">
                         <Lock className="w-3 h-3 text-green-600" />
-                        <span className="font-medium">Pago 100% Seguro</span>
+                        <span className="font-medium">Compra 100% Segura</span>
                     </div>
                     <img src="https://cdn.shopify.com/s/files/1/0013/3696/7229/files/trust-badges-shopify.png?v=1625625136" alt="Tarjetas" className="h-5 opacity-60" />
                   </div>
                   
                   <p className="text-center text-gray-400 text-[10px] mt-4 leading-tight">
-                      Al hacer clic, serás redirigido a la plataforma de pago segura. Garantía de satisfacción de 7 días incluida.
+                      Al hacer clic, serás redirigido a la plataforma segura <strong>Sandie Tienda</strong> para finalizar tu compra.
                   </p>
             </div>
 
