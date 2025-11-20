@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Calculator, DollarSign, TrendingUp, Plane, ShoppingBag, Coffee } from 'lucide-react';
+import { Calculator, DollarSign, TrendingUp, Plane, ShoppingBag, Coffee, ArrowRight } from 'lucide-react';
 import { MAIN_PRODUCT } from '../constants';
 
 const SavingsCalculator: React.FC = () => {
@@ -94,7 +94,7 @@ const SavingsCalculator: React.FC = () => {
                         type="range" 
                         min="2000" 
                         max="100000" 
-                        step="500" 
+                        step="1000" 
                         value={deliveryCost} 
                         onChange={(e) => setDeliveryCost(Number(e.target.value))}
                         className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-brand-500"
@@ -124,7 +124,7 @@ const SavingsCalculator: React.FC = () => {
 
            {/* RESULTS */}
            <div className="lg:col-span-5 relative">
-              <div className="bg-brand-900 text-white p-8 rounded-3xl shadow-2xl border-4 border-brand-700 relative overflow-hidden">
+              <div className="bg-brand-900 text-white p-8 rounded-3xl shadow-2xl border-4 border-brand-700 relative overflow-hidden flex flex-col h-full justify-between">
                   <div className="absolute top-0 right-0 p-32 bg-white opacity-5 rounded-full blur-3xl transform translate-x-10 -translate-y-10"></div>
                   
                   <div className="relative z-10 text-center">
@@ -142,7 +142,7 @@ const SavingsCalculator: React.FC = () => {
                       </div>
                       <p className="text-3xl font-bold text-accent-400 mb-6">{formatCurrency(annualSavings)}</p>
 
-                      <div className="bg-white/10 rounded-xl p-4 backdrop-blur-sm border border-white/10 text-left">
+                      <div className="bg-white/10 rounded-xl p-4 backdrop-blur-sm border border-white/10 text-left mb-6">
                           <p className="text-xs text-brand-200 mb-3 text-center uppercase tracking-wide font-bold">¿Qué harías con esa plata?</p>
                           <div className="space-y-2">
                               <div className="flex items-center gap-3 text-sm">
@@ -160,9 +160,16 @@ const SavingsCalculator: React.FC = () => {
                           </div>
                       </div>
                       
-                      <div className="mt-8 bg-accent-500 text-brand-900 p-3 rounded-lg font-bold text-sm shadow-lg animate-pulse">
-                          ¡El curso se paga solo en {Math.ceil(MAIN_PRODUCT.price / (monthlySavings / 30))} días!
-                      </div>
+                      <button 
+                        onClick={() => document.getElementById('offer')?.scrollIntoView({behavior: 'smooth'})}
+                        className="w-full bg-white text-brand-900 font-bold py-3 px-4 rounded-xl shadow-lg hover:bg-gray-100 transition transform hover:-translate-y-1 flex items-center justify-center gap-2 group"
+                      >
+                          <span>Invertir en Ahorrar Ahora</span>
+                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
+                      </button>
+                      <p className="text-[10px] text-brand-200 mt-2 text-center">
+                          El curso se paga solo en {Math.max(1, Math.ceil(MAIN_PRODUCT.price / (monthlySavings / 30) || 1))} días con lo que ahorras.
+                      </p>
                   </div>
               </div>
            </div>

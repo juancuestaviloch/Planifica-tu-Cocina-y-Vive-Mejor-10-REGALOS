@@ -27,17 +27,29 @@ function App() {
       <UrgencyBar />
       <StickyCTA />
       <SocialProofToast />
+      
+      {/* FASE 1: ENGANCHE Y PROBLEMA */}
       <Hero />
       <PainPoints />
       <AudienceFilter />
+      
+      {/* FASE 2: DESEO Y SOLUCIÓN */}
       <Transformation />
       <Solution />
-      <SavingsCalculator />
+      
+      {/* FASE 3: TANGIBILIDAD DEL PRODUCTO (Emoción visual) */}
       <InsideLook />
       <ProductShowcase />
-      <ComparisonTable />
-      <Bonuses />
+      
+      {/* FASE 4: PRUEBA SOCIAL (Validación) */}
       <Testimonials />
+
+      {/* FASE 5: LÓGICA Y RACIONALIZACIÓN (Justificar la compra) */}
+      <ComparisonTable />
+      <SavingsCalculator />
+      
+      {/* FASE 6: OFERTA Y CIERRE */}
+      <Bonuses />
       <Author />
       <Guarantee />
       <Offer />
