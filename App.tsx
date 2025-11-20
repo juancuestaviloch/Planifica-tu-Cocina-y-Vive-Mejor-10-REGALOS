@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Hero from './components/Hero';
 import PainPoints from './components/PainPoints';
@@ -13,15 +14,23 @@ import Footer from './components/Footer';
 import Chatbot from './components/Chatbot';
 import UrgencyBar from './components/UrgencyBar';
 import StickyCTA from './components/StickyCTA';
+import SocialProofToast from './components/SocialProofToast';
+import AudienceFilter from './components/AudienceFilter';
+import Transformation from './components/Transformation';
+import InsideLook from './components/InsideLook';
 
 function App() {
   return (
     <div className="font-sans text-gray-900 antialiased scroll-smooth relative">
       <UrgencyBar />
       <StickyCTA />
+      <SocialProofToast />
       <Hero />
       <PainPoints />
+      <AudienceFilter />
+      <Transformation />
       <Solution />
+      <InsideLook />
       <ProductShowcase />
       <Bonuses />
       <Testimonials />
