@@ -18,6 +18,8 @@ import SocialProofToast from './components/SocialProofToast';
 import AudienceFilter from './components/AudienceFilter';
 import Transformation from './components/Transformation';
 import InsideLook from './components/InsideLook';
+import SavingsCalculator from './components/SavingsCalculator';
+import ComparisonTable from './components/ComparisonTable';
 
 function App() {
   return (
@@ -30,8 +32,10 @@ function App() {
       <AudienceFilter />
       <Transformation />
       <Solution />
+      <SavingsCalculator />
       <InsideLook />
       <ProductShowcase />
+      <ComparisonTable />
       <Bonuses />
       <Testimonials />
       <Author />
