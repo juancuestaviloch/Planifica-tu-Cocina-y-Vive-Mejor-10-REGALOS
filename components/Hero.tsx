@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight, Star, Users, ShieldCheck } from 'lucide-react';
+import { CHECKOUT_URL } from '../constants';
 
 const Hero: React.FC = () => {
   return (
@@ -24,7 +25,12 @@ const Hero: React.FC = () => {
             </p>
             
             <div className="mt-8 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0">
-              <a href="#offer" className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-bold rounded-full text-white bg-accent-500 hover:bg-accent-600 shadow-lg transform transition hover:-translate-y-1 md:text-xl">
+              <a 
+                href={CHECKOUT_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-bold rounded-full text-white bg-accent-500 hover:bg-accent-600 shadow-lg transform transition hover:-translate-y-1 md:text-xl"
+              >
                 ¡QUIERO ACCESO INMEDIATO!
                 <ArrowRight className="ml-2 -mr-1 w-5 h-5" />
               </a>

@@ -11,10 +11,14 @@ import FAQ from './components/FAQ';
 import Offer from './components/Offer';
 import Footer from './components/Footer';
 import Chatbot from './components/Chatbot';
+import UrgencyBar from './components/UrgencyBar';
+import StickyCTA from './components/StickyCTA';
 
 function App() {
   return (
-    <div className="font-sans text-gray-900 antialiased scroll-smooth">
+    <div className="font-sans text-gray-900 antialiased scroll-smooth relative">
+      <UrgencyBar />
+      <StickyCTA />
       <Hero />
       <PainPoints />
       <Solution />

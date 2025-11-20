@@ -1,6 +1,8 @@
 import { BonusItem, Feature, Testimonial, Module, FAQItem } from './types';
 import { AlertTriangle, Leaf, Clock, Heart, ShieldCheck, CheckCircle, Star, XCircle } from 'lucide-react';
 
+export const CHECKOUT_URL = "https://sandietienda.myshopify.com/products/planifica-tu-vida-y-vive-mejor-10-regalos?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web";
+
 export const MAIN_PRODUCT = {
   title: "Sistema Cocina Resuelta",
   subtitle: "El método exacto para cocinar en solo 2 horas lo que comerás en toda la semana, ahorrar miles en el súper y recuperar tu paz mental.",

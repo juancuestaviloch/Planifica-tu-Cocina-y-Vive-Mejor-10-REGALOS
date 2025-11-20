@@ -1,5 +1,5 @@
 import React from 'react';
-import { MAIN_PRODUCT, BONUSES } from '../constants';
+import { MAIN_PRODUCT, BONUSES, CHECKOUT_URL } from '../constants';
 import { Check, ArrowRight, Lock, Book, Smartphone, Tablet } from 'lucide-react';
 
 const Offer: React.FC = () => {
@@ -94,9 +94,14 @@ const Offer: React.FC = () => {
                       <p className="text-green-600 text-sm font-bold mt-2">¡Ahorras ${(MAIN_PRODUCT.originalPrice - MAIN_PRODUCT.price).toLocaleString('es-AR')} ARS!</p>
                   </div>
                   
-                  <button className="w-full bg-accent-500 hover:bg-accent-600 text-white font-bold text-lg py-4 px-4 rounded-xl shadow-xl transform transition hover:-translate-y-1 flex flex-col items-center justify-center gap-1 mb-4 animate-pulse group">
+                  <a 
+                    href={CHECKOUT_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full bg-accent-500 hover:bg-accent-600 text-white font-bold text-lg py-4 px-4 rounded-xl shadow-xl transform transition hover:-translate-y-1 flex flex-col items-center justify-center gap-1 mb-4 animate-pulse group"
+                  >
                     <span className="flex items-center gap-2">DESCARGAR AHORA <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition" /></span>
-                  </button>
+                  </a>
 
                   <div className="flex flex-col items-center gap-4 text-xs text-gray-500 mt-4">
                     <div className="flex items-center gap-2 bg-white px-3 py-1 rounded-full border border-gray-200">
@@ -107,7 +112,7 @@ const Offer: React.FC = () => {
                   </div>
                   
                   <p className="text-center text-gray-400 text-[10px] mt-4 leading-tight">
-                      Al hacer clic, serás redirigido a la plataforma de pago segura de Hotmart/Stripe. Garantía de satisfacción de 7 días incluida.
+                      Al hacer clic, serás redirigido a la plataforma de pago segura. Garantía de satisfacción de 7 días incluida.
                   </p>
             </div>
 
