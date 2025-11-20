@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Hero from './components/Hero';
 import PainPoints from './components/PainPoints';
 import Solution from './components/Solution';
@@ -21,14 +21,48 @@ import InsideLook from './components/InsideLook';
 import SavingsCalculator from './components/SavingsCalculator';
 import ComparisonTable from './components/ComparisonTable';
 import ExitIntentModal from './components/ExitIntentModal';
+import DiscountWheel from './components/DiscountWheel';
+
+// New Pages
+import TermsPage from './components/TermsPage';
+import PrivacyPage from './components/PrivacyPage';
+import ContactPage from './components/ContactPage';
+
+type PageRoute = 'home' | 'terms' | 'privacy' | 'contact';
 
 function App() {
+  const [currentPage, setCurrentPage] = useState<PageRoute>('home');
+
+  // Scroll to top when page changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentPage]);
+
+  const handleNavigation = (page: PageRoute) => {
+    setCurrentPage(page);
+  };
+
+  // Render Logic
+  if (currentPage === 'terms') {
+    return <TermsPage onBack={() => setCurrentPage('home')} />;
+  }
+
+  if (currentPage === 'privacy') {
+    return <PrivacyPage onBack={() => setCurrentPage('home')} />;
+  }
+
+  if (currentPage === 'contact') {
+    return <ContactPage onBack={() => setCurrentPage('home')} />;
+  }
+
+  // Landing Page (Home)
   return (
     <div className="font-sans text-gray-900 antialiased scroll-smooth relative">
       <UrgencyBar />
       <StickyCTA />
       <SocialProofToast />
       <ExitIntentModal />
+      <DiscountWheel />
       
       {/* FASE 1: ENGANCHE Y PROBLEMA */}
       <Hero />
@@ -56,7 +90,7 @@ function App() {
       <Guarantee />
       <Offer />
       <FAQ />
-      <Footer />
+      <Footer onNavigate={handleNavigation} />
       <Chatbot />
     </div>
   );
