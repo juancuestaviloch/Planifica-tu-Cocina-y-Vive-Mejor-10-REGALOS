@@ -36,7 +36,15 @@ const Chatbot: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+      // Vite replaces process.env.API_KEY with the string literal at build time.
+      // Ensure the define in vite.config.ts matches this exactly.
+      const apiKey = process.env.API_KEY;
+      
+      if (!apiKey || apiKey.includes("your_api_key_here")) {
+        throw new Error("Falta la API Key. Verificá la configuración en vite.config.ts");
+      }
+
+      const ai = new GoogleGenAI({ apiKey: apiKey });
       
       // Construct context from constants to make the AI "Product Aware"
       const productContext = JSON.stringify({
@@ -75,18 +83,46 @@ const Chatbot: React.FC = () => {
 
       const response = await ai.models.generateContent({
         model: 'gemini-2.5-flash',
-        contents: userMessage,
+        contents: {
+          parts: [{ text: userMessage }]
+        },
         config: {
-          systemInstruction: systemInstruction,
+          systemInstruction: { parts: [{ text: systemInstruction }] },
         }
       });
 
-      const aiResponse = response.text || "Uy, se me cortó internet un segundo. ¿Me repetís?";
+      // Check if the response has text.
+      // Sometimes safety filters block the response, resulting in no text.
+      let aiText = "Uy, se me cortó internet un segundo. ¿Me repetís?";
       
-      setMessages(prev => [...prev, { role: 'model', text: aiResponse }]);
+      if (response.candidates && response.candidates.length > 0) {
+         // Check finish reason
+         const candidate = response.candidates[0];
+         if (candidate.finishReason === 'STOP') {
+             aiText = response.text || aiText;
+         } else if (candidate.finishReason === 'SAFETY') {
+             aiText = "Perdoná, no puedo responder a eso por políticas de seguridad. ¿Hablamos del recetario?";
+         } else {
+             aiText = response.text || aiText;
+         }
+      }
+
+      setMessages(prev => [...prev, { role: 'model', text: aiText }]);
     } catch (error) {
-      console.error("Error generating AI response:", error);
-      setMessages(prev => [...prev, { role: 'model', text: "Che, estoy teniendo un problemita de conexión. Bancame un cachito e intentá de nuevo." }]);
+      console.error("Error detallado de IA:", error);
+      let errorMsg = "Che, estoy teniendo un problemita de conexión. Bancame un cachito e intentá de nuevo.";
+      
+      if (error instanceof Error) {
+        if (error.message.includes('403')) {
+           errorMsg = "Parece que hay un problema de permisos con la clave (Error 403).";
+        } else if (error.message.includes('404')) {
+           errorMsg = "No encuentro el modelo de inteligencia artificial (Error 404).";
+        } else if (error.message.includes('API Key')) {
+            errorMsg = "Falta configurar la clave de API.";
+        }
+      }
+      
+      setMessages(prev => [...prev, { role: 'model', text: errorMsg }]);
     } finally {
       setIsLoading(false);
     }
