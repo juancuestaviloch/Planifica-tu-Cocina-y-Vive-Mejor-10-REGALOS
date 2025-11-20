@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ArrowLeft, Mail, MessageCircle, Clock, MapPin } from 'lucide-react';
+import { ArrowLeft, Mail, MessageCircle, Clock } from 'lucide-react';
 
 interface Props {
   onBack: () => void;

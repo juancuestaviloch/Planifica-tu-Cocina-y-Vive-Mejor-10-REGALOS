@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ArrowLeft, Lock, Eye } from 'lucide-react';
+import { ArrowLeft, Lock } from 'lucide-react';
 
 interface Props {
   onBack: () => void;

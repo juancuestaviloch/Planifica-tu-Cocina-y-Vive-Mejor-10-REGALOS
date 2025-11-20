@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ArrowLeft, ShieldCheck, FileText } from 'lucide-react';
+import { ArrowLeft, FileText } from 'lucide-react';
 
 interface Props {
   onBack: () => void;
