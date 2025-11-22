@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { ArrowRight, Star, CreditCard, Zap, Banknote } from 'lucide-react';
+import { ArrowRight, Star, CreditCard, Zap, Banknote, ChevronDown } from 'lucide-react';
 import { CHECKOUT_URL } from '../constants';
 
 const Hero: React.FC = () => {
@@ -42,19 +42,18 @@ const Hero: React.FC = () => {
             </p>
             
             <div className="mt-8 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0">
-              <a 
-                href={CHECKOUT_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-bold rounded-full text-white bg-accent-500 hover:bg-accent-600 shadow-xl hover:shadow-2xl transform transition hover:-translate-y-1 md:text-xl"
-              >
-                ¡QUIERO MI SISTEMA YA!
-                <ArrowRight className="ml-2 -mr-1 w-5 h-5" />
-              </a>
-              <p className="mt-3 text-xs text-gray-500 uppercase tracking-wider font-semibold flex items-center justify-center lg:justify-start gap-2">
-                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                Oferta válida hasta hoy {currentDate}
-              </p>
+              {/* Button Removed as requested to force reading */}
+              
+              <div className="inline-flex flex-col gap-2">
+                  <p className="text-sm text-gray-500 uppercase tracking-wider font-semibold flex items-center justify-center lg:justify-start gap-2 bg-white/50 px-4 py-2 rounded-full border border-brand-100 backdrop-blur-sm w-fit">
+                    <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                    Oferta válida hasta hoy {currentDate}
+                  </p>
+                  <p className="text-xs text-brand-600 font-medium flex items-center gap-1 animate-bounce mt-2">
+                    <ChevronDown className="w-4 h-4" />
+                    Descubrí cómo funciona abajo
+                  </p>
+              </div>
             </div>
 
             <div className="mt-8 flex items-center justify-center lg:justify-start gap-4 text-sm text-gray-500">

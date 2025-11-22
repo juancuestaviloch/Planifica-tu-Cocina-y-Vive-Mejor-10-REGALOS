@@ -1,7 +1,7 @@
 import { BonusItem, Feature, Testimonial, Module, FAQItem } from './types';
 import { AlertTriangle, Leaf, Clock, Heart, ShieldCheck, CheckCircle, Star, XCircle } from 'lucide-react';
 
-export const CHECKOUT_URL = "https://share.google/H8UFXhCB6iQXnEzSI";
+export const CHECKOUT_URL = "https://sandie5.mitiendanube.com/productos/planifica-tu-cocina-y-vive-mejor-10-regalos/";
 
 export const MAIN_PRODUCT = {
   title: "Sistema Cocina Resuelta",

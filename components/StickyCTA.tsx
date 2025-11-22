@@ -8,7 +8,9 @@ const StickyCTA: React.FC = () => {
 
   useEffect(() => {
     const toggleVisibility = () => {
-      if (window.scrollY > 800) {
+      // CHANGED: Increased threshold to 4500px to ensure it appears ONLY after the calculator
+      // This accounts for Hero + PainPoints + Audience + Transformation + Solution + InsideLook + Showcase + Testimonials
+      if (window.scrollY > 4500) {
         setIsVisible(true);
       } else {
         setIsVisible(false);

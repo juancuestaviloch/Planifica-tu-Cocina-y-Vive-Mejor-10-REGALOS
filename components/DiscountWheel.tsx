@@ -66,7 +66,7 @@ const DiscountWheel: React.FC = () => {
 
       const scrollPosition = window.scrollY + window.innerHeight;
       const pageHeight = document.body.scrollHeight;
-      const triggerPoint = pageHeight * 0.75; // 3/4 of the page
+      const triggerPoint = pageHeight * 0.25; // CHANGED: Trigger at 25% of the page (first quarter)
 
       if (scrollPosition > triggerPoint) {
         setIsOpen(true);
