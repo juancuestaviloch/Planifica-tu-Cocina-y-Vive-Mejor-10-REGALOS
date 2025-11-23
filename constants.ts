@@ -1,7 +1,7 @@
 import { BonusItem, Feature, Testimonial, Module, FAQItem } from './types';
 import { AlertTriangle, Leaf, Clock, Heart, ShieldCheck, CheckCircle, Star, XCircle } from 'lucide-react';
 
-export const CHECKOUT_URL = "https://sandie5.mitiendanube.com/productos/planifica-tu-cocina-y-vive-mejor-10-regalos/";
+export const CHECKOUT_URL = "https://sandietienda.mitiendanube.com/productos/planifica-tu-cocina-y-vive-mejor-10-regalos/";
 
 export const MAIN_PRODUCT = {
   title: "Sistema Cocina Resuelta",
@@ -103,62 +103,62 @@ export const BONUSES: BonusItem[] = [
   {
     title: "BONO #9: Bolitas Energéticas (Snacks)",
     value: "Valor Real: $8.500",
-    description: "El snack perfecto para la oficina o el colegio. Sin azúcar, llenas de energía y se hacen en 10 minutos. Ideales para tener siempre en el freezer.",
-    image: "https://images.unsplash.com/photo-1600336862255-861c3635d6dc?auto=format&fit=crop&q=80&w=500&h=300",
+    description: "El snack perfecto para la media tarde. Sin azúcar, lleno de fibra y proteína. Se hacen en 10 minutos y se guardan en el freezer.",
+    image: "https://images.unsplash.com/photo-1600421609643-c59c7c02326a?auto=format&fit=crop&q=80&w=500&h=300",
     illustration: "snack"
   },
   {
-    title: "BONO #10: Leche Condensada Keto & Postres",
-    value: "Valor Real: $7.500",
-    description: "La receta secreta para hacer leche condensada sin azúcar en casa y usarla en tus postres favoritos. Imprescindible para los dulceros.",
-    image: "https://images.unsplash.com/photo-1574884263538-655d998df825?auto=format&fit=crop&q=80&w=500&h=300",
+    title: "BONO #10: Frascos de Ensalada (Mason Jars)",
+    value: "Valor Real: $10.500",
+    description: "El método viral para que la ensalada dure 5 días crocante. Ideal para llevar a la oficina. Técnica de capas y combinaciones deliciosas.",
+    image: "https://images.unsplash.com/photo-1601059637084-f36c0d503116?auto=format&fit=crop&q=80&w=500&h=300",
     illustration: "jar"
-  },
+  }
 ];
 
 export const TESTIMONIALS: Testimonial[] = [
   {
     name: "Carolina M.",
-    role: "Mamá de 2 y Abogada",
-    content: "Sentía que vivía en la cocina. Llegaba del trabajo y tenía que empezar el segundo turno. Con este método, dedico 2 horas el domingo y me olvido el resto de la semana. ¡Mis hijos comen verduras sin darse cuenta y yo recuperé mis noches!",
+    role: "Madre de 3 hijos y Abogada",
+    content: "Antes gastaba fortunas en delivery porque llegaba muerta del trabajo. Con el método de Ramón, cocino los domingos escuchando música y en la semana solo caliento. ¡Recuperé mi paz mental!",
     image: "https://randomuser.me/api/portraits/women/44.jpg",
     stars: 5
   },
   {
-    name: "Dr. Esteban R.",
-    role: "Médico",
-    content: "Como médico recomiendo esto a mis pacientes. No es una dieta, es un sistema de vida. Bajé 8 kilos simplemente porque dejé de pedir delivery por falta de tiempo. La organización es salud.",
-    image: "https://randomuser.me/api/portraits/men/32.jpg",
+    name: "Sofía R.",
+    role: "Estudiante Universitaria",
+    content: "Vivo sola y siempre terminaba comiendo fideos. Este sistema me enseñó a comprar lo justo y comer variado sin gastar de más. La guía de freezer es oro puro.",
+    image: "https://randomuser.me/api/portraits/women/65.jpg",
     stars: 5
   },
   {
-    name: "Laura S.",
-    role: "Emprendedora Digital",
-    content: "El bono de viandas me salvó la vida y el bolsillo. Antes gastaba una fortuna comiendo menú ejecutivo cerca de la oficina. Ahora como rico, sano y ahorro muchísimo dinero que uso para viajar.",
-    image: "https://randomuser.me/api/portraits/women/68.jpg",
+    name: "Valeria T.",
+    role: "Emprendedora",
+    content: "Creía que comer sano llevaba horas. Los macerados me salvaron la vida, el pollo queda increíble. Y los bonos son un regalo, solo el recetario keto vale el precio.",
+    image: "https://randomuser.me/api/portraits/women/32.jpg",
     stars: 5
   }
 ];
 
 export const FAQS: FAQItem[] = [
   {
-    question: "¿Necesito ser experta en cocina o tener equipos caros?",
-    answer: "Para nada. El eBook está diseñado para personas reales con cocinas reales. Si tenés un horno, hornallas y un cuchillo, tenés todo lo que necesitás. Las recetas son a prueba de fallos."
+    question: "¿Cómo recibo el material?",
+    answer: "El acceso es inmediato y automático. Una vez confirmado el pago, recibís un correo electrónico con el enlace de descarga de todo el material (eBook principal + los 10 bonos) en formato PDF de alta calidad, listo para leer en celular, tablet o computadora."
   },
   {
-    question: "¿Sirve para familias numerosas?",
-    answer: "¡Recontra! El método de Cocina en Bloque es ideal para familias. Solo multiplicás las cantidades. De hecho, cocinar para muchos todos los días es agotador; este sistema es tu solución definitiva para recuperar tu tiempo."
+    question: "¿Sirve si soy principiante en la cocina?",
+    answer: "¡Absolutamente! El sistema está diseñado paso a paso. No damos por sentado nada. Te enseñamos desde cómo hacer la lista de compras hasta cómo cortar las verduras. Si sabés hervir agua, podés hacer este curso."
   },
   {
-    question: "¿Soy celíaca o vegetariana, esto es para mí?",
-    answer: "Sí. El sistema se basa en ingredientes naturales (carnes, verduras, legumbres). Además, incluimos bonos específicos con 50 recetas veganas y opciones sin gluten (Keto) para que adaptes todo a tu estilo de vida."
+    question: "¿Las recetas tienen ingredientes difíciles de conseguir?",
+    answer: "Para nada. Odiamos las recetas con ingredientes raros. Todo lo que usamos se consigue en cualquier supermercado de barrio o verdulería: pollo, carne, huevos, legumbres, verduras de estación, arroz, etc."
   },
   {
-    question: "¿Cómo accedo al material? ¿Me llega a casa?",
-    answer: "El acceso es 100% digital e inmediato. No tenés que esperar envíos. Una vez realizado el pago, recibís un correo automático con el enlace de descarga de todo el pack (eBook principal + 10 bonos) para leer en tu celular, tablet o computadora."
+    question: "¿Sirve si soy vegetariana/o?",
+    answer: "Sí, el método de organización es universal. Además, incluimos un bono exclusivo con 50 recetas veganas y muchas de las preparaciones base son adaptables reemplazando la proteína animal por legumbres o tofu."
   },
   {
-    question: "¿Qué pasa si no me gusta o no me sirve?",
-    answer: "Tenés nuestra Garantía de Hierro de 7 días. Si comprás el pack, lo revisás y sentís que no aporta valor a tu vida, nos mandás un email y te devolvemos el 100% de tu dinero. Sin preguntas, sin letra chica."
+    question: "¿Qué pasa si no estoy satisfecha?",
+    answer: "Tenés una Garantía de Hierro de 7 días. Si comprás el pack, lo lees y sentís que no aporta valor a tu vida, nos enviás un email y te devolvemos el 100% de tu dinero. Sin preguntas incómodas."
   }
 ];

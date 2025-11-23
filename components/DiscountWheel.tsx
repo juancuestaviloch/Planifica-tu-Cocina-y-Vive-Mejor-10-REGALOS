@@ -11,11 +11,7 @@ interface Prize {
 }
 
 // PARA ACTIVAR GOOGLE SHEETS:
-// 1. Crea un Google Sheet > Extensiones > Apps Script.
-// 2. Crea un script doPost(e) que guarde los datos.
-// 3. Publica como App Web con acceso "Cualquiera".
-// 4. Pega la URL aquí:
-const GOOGLE_SCRIPT_URL = ""; // Ej: "https://script.google.com/macros/s/AKfycbx.../exec"
+const GOOGLE_SCRIPT_URL = ""; 
 
 const DiscountWheel: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,6 +26,14 @@ const DiscountWheel: React.FC = () => {
   const SPUN_KEY = 'cocina-resuelta-wheel-spun';
   const DISMISSED_KEY = 'cocina-resuelta-wheel-dismissed';
 
+  // Helper functions for safe storage access
+  const safeGetItem = (key: string) => {
+    try { return localStorage.getItem(key); } catch (e) { return null; }
+  };
+  const safeSetItem = (key: string, value: string) => {
+    try { localStorage.setItem(key, value); } catch (e) { }
+  };
+
   // Wheel Segments Configuration - FIXED CODES
   const SEGMENTS: Prize[] = [
     { label: '10% OFF', value: 10, color: '#dcfce7', textColor: '#166534', code: 'Sandie10' },
@@ -42,7 +46,7 @@ const DiscountWheel: React.FC = () => {
 
   useEffect(() => {
     // Check if already spun on mount
-    if (localStorage.getItem(SPUN_KEY)) {
+    if (safeGetItem(SPUN_KEY)) {
       setHasSpun(true);
     }
   }, []);
@@ -51,9 +55,7 @@ const DiscountWheel: React.FC = () => {
     const handleScroll = () => {
       if (isOpen || hasSpun) return;
 
-      // Check if user dismissed the modal recently (24 hour cooldown for AUTO open)
-      // BUT we will still show the small button if dismissed.
-      const dismissedTimestamp = localStorage.getItem(DISMISSED_KEY);
+      const dismissedTimestamp = safeGetItem(DISMISSED_KEY);
       if (dismissedTimestamp) {
         const now = Date.now();
         const dismissedTime = parseInt(dismissedTimestamp, 10);
@@ -66,7 +68,7 @@ const DiscountWheel: React.FC = () => {
 
       const scrollPosition = window.scrollY + window.innerHeight;
       const pageHeight = document.body.scrollHeight;
-      const triggerPoint = pageHeight * 0.25; // CHANGED: Trigger at 25% of the page (first quarter)
+      const triggerPoint = pageHeight * 0.25; 
 
       if (scrollPosition > triggerPoint) {
         setIsOpen(true);
@@ -79,28 +81,18 @@ const DiscountWheel: React.FC = () => {
 
   const handleClose = () => {
       setIsOpen(false);
-      // Save current timestamp to prevent reopening automatically
-      localStorage.setItem(DISMISSED_KEY, Date.now().toString());
+      safeSetItem(DISMISSED_KEY, Date.now().toString());
   };
 
   const saveEmailToGoogleSheets = async (userEmail: string) => {
-    if (!GOOGLE_SCRIPT_URL) {
-        console.log("Simulando guardado de email (Falta URL de Google Script):", userEmail);
-        return;
-    }
-
+    if (!GOOGLE_SCRIPT_URL) return;
     try {
-        // Using no-cors mode because Google Scripts don't return standard CORS headers for simple GET/POST
-        // This means we won't know if it failed or succeeded 100%, but it works for logging.
         await fetch(GOOGLE_SCRIPT_URL, {
             method: 'POST',
             mode: 'no-cors',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email: userEmail, date: new Date().toISOString() })
         });
-        console.log("Email enviado a Google Sheets");
     } catch (error) {
         console.error("Error guardando email:", error);
     }
@@ -109,14 +101,9 @@ const DiscountWheel: React.FC = () => {
   const determinePrize = (): number => {
     const rand = Math.random() * 100;
     let winningValue = 10;
-
-    if (rand < 90) {
-      winningValue = 10;
-    } else if (rand < 99) {
-      winningValue = 15;
-    } else {
-      winningValue = 20;
-    }
+    if (rand < 90) winningValue = 10;
+    else if (rand < 99) winningValue = 15;
+    else winningValue = 20;
 
     const matchingIndices = SEGMENTS.map((seg, idx) => seg.value === winningValue ? idx : -1).filter(idx => idx !== -1);
     const winningIndex = matchingIndices[Math.floor(Math.random() * matchingIndices.length)];
@@ -127,11 +114,10 @@ const DiscountWheel: React.FC = () => {
     e.preventDefault();
     if (!email.includes('@')) return;
 
-    // Save Email
     saveEmailToGoogleSheets(email);
 
     setStep('spinning');
-    localStorage.setItem(SPUN_KEY, 'true');
+    safeSetItem(SPUN_KEY, 'true');
     setHasSpun(true);
 
     const winningIndex = determinePrize();
@@ -160,20 +146,6 @@ const DiscountWheel: React.FC = () => {
 
   return (
     <>
-      {/* Floating Trigger Button (Only shows if closed AND hasn't spun yet) */}
-      {!isOpen && !hasSpun && (
-        <button
-            onClick={() => setIsOpen(true)}
-            className="fixed bottom-4 left-4 z-40 bg-brand-600 hover:bg-brand-700 text-white p-3 rounded-full shadow-xl border-4 border-white animate-bounce hover:animate-none transition-all duration-300 group"
-            aria-label="Abrir ruleta de descuentos"
-        >
-            <Gift className="w-6 h-6" />
-            <span className="absolute left-full ml-2 top-1/2 -translate-y-1/2 bg-white text-brand-900 text-xs font-bold px-2 py-1 rounded shadow-md opacity-0 group-hover:opacity-100 transition whitespace-nowrap pointer-events-none">
-                ¡Tu descuento!
-            </span>
-        </button>
-      )}
-
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-in fade-in duration-500">
             {/* Backdrop */}

@@ -8,15 +8,23 @@ const ExitIntentModal: React.FC = () => {
   const [hasBeenShown, setHasBeenShown] = useState(false);
 
   useEffect(() => {
+    const safeGetSession = (key: string) => {
+      try { return sessionStorage.getItem(key); } catch (e) { return null; }
+    };
+    const safeSetSession = (key: string, value: string) => {
+      try { sessionStorage.setItem(key, value); } catch (e) { }
+    };
+
+    const sessionKey = 'cocina-resuelta-exit-modal-shown';
+
     // Función para detectar la salida del mouse por la parte superior (Desktop)
     const handleMouseLeave = (e: MouseEvent) => {
       if (e.clientY <= 0 && !hasBeenShown) {
-        // Verificar si ya se mostró en esta sesión (usando sessionStorage)
-        const sessionKey = 'cocina-resuelta-exit-modal-shown';
-        if (!sessionStorage.getItem(sessionKey)) {
+        // Verificar si ya se mostró en esta sesión
+        if (!safeGetSession(sessionKey)) {
             setIsVisible(true);
             setHasBeenShown(true);
-            sessionStorage.setItem(sessionKey, 'true');
+            safeSetSession(sessionKey, 'true');
         }
       }
     };
@@ -25,13 +33,10 @@ const ExitIntentModal: React.FC = () => {
 
     // Fallback para móviles: Mostrar después de 60 segundos si no ha comprado
     const timer = setTimeout(() => {
-        const sessionKey = 'cocina-resuelta-exit-modal-shown';
-        if (!hasBeenShown && !sessionStorage.getItem(sessionKey)) {
-             // En móviles es intrusivo, lo hacemos menos agresivo o solo por tiempo
-             // Por ahora, activamos por tiempo como "segunda oportunidad"
+        if (!hasBeenShown && !safeGetSession(sessionKey)) {
              setIsVisible(true);
              setHasBeenShown(true);
-             sessionStorage.setItem(sessionKey, 'true');
+             safeSetSession(sessionKey, 'true');
         }
     }, 60000);
 
