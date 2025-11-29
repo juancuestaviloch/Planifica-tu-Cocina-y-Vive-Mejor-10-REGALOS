@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { ChevronLeft, ChevronRight, MousePointerClick } from 'lucide-react';
+import { ChevronLeft, ChevronRight, MousePointerClick, Star, Bookmark, ChefHat, ArrowRight } from 'lucide-react';
 
 const BOOK_PAGES = [
   // COVER
@@ -8,223 +8,260 @@ const BOOK_PAGES = [
     id: 0,
     type: 'cover',
     content: (
-      <div className="h-full w-full bg-[#eaddcf] flex flex-col items-center justify-center p-2 border-l-8 border-[#c7b299] relative overflow-hidden shadow-inner">
-        <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/leather.png')]"></div>
-        {/* Binding stitching effect */}
-        <div className="absolute left-1 top-0 bottom-0 w-0.5 border-l border-dashed border-gray-400/30"></div>
+      <div className="h-full w-full bg-[#1a3624] flex flex-col items-center justify-between p-1 border-l-4 border-[#0f1f14] relative overflow-hidden shadow-inner rounded-r-md">
+        {/* Leather Texture Overlay */}
+        <div className="absolute inset-0 opacity-30 bg-[url('https://www.transparenttextures.com/patterns/black-scales.png')] mix-blend-overlay"></div>
         
-        <div className="h-full w-full border-2 border-[#8b4513]/20 p-4 flex flex-col items-center justify-between relative z-10 bg-[#faeadd]">
-            <div className="text-center mt-4">
-                <span className="text-brand-800 font-bold tracking-[0.3em] text-[10px] uppercase mb-1 block">Guía Práctica</span>
-                <div className="w-8 h-0.5 bg-accent-500 mx-auto mb-4"></div>
+        {/* Gold Border Frame */}
+        <div className="absolute inset-3 border border-[#d4af37] opacity-60 rounded-sm pointer-events-none"></div>
+        <div className="absolute inset-4 border border-[#d4af37] opacity-30 rounded-sm pointer-events-none"></div>
+
+        <div className="relative z-10 flex flex-col h-full items-center justify-between py-8 px-4 text-center">
+            
+            <div className="flex items-center gap-2 mb-2">
+                <Star className="w-3 h-3 text-[#d4af37] fill-current" />
+                <span className="text-[#d4af37] text-[8px] tracking-[0.3em] uppercase font-serif">Best Seller 2025</span>
+                <Star className="w-3 h-3 text-[#d4af37] fill-current" />
             </div>
 
-            <div className="text-center">
-                <h1 className="font-serif text-3xl text-brand-900 font-black leading-[0.9] mb-2 tracking-tight">
-                    COCINÁ<br/><span className="text-accent-600">UNA VEZ</span>
+            <div className="space-y-2">
+                <h1 className="font-serif text-4xl text-[#f3e5ab] font-black leading-[0.85] tracking-tight drop-shadow-md">
+                    COCINA<br/>RESUELTA
                 </h1>
-                <h2 className="font-sans text-brand-800 text-sm font-bold uppercase tracking-wider">
-                    Comé sano toda la semana
+                <div className="w-12 h-0.5 bg-[#d4af37] mx-auto mt-2"></div>
+                <h2 className="font-sans text-brand-100 text-[9px] font-medium uppercase tracking-widest mt-2 max-w-[200px] mx-auto leading-relaxed opacity-80">
+                    El sistema definitivo de organización semanal
                 </h2>
             </div>
             
-            <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-xl my-2">
-                <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=400" alt="Meal Prep" className="w-full h-full object-cover hover:scale-110 transition duration-700" />
+            {/* Centerpiece Image Circle - FIXED IMAGE */}
+            <div className="relative group my-4">
+                <div className="absolute inset-0 bg-[#d4af37] rounded-full blur-md opacity-20 group-hover:opacity-40 transition duration-700"></div>
+                <div className="w-36 h-36 rounded-full overflow-hidden border-[3px] border-[#d4af37] shadow-2xl relative z-10 bg-[#1a3624]">
+                    {/* High Quality Meal Prep Image (Top Down View for better Circle Fit) */}
+                    <img 
+                        src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&q=80&w=600" 
+                        alt="Meal Prep Healthy Food" 
+                        className="w-full h-full object-cover object-center transform hover:scale-110 transition duration-700" 
+                    />
+                </div>
             </div>
 
-            <div className="text-center mb-4">
-                 <p className="text-[9px] text-gray-500 font-medium uppercase tracking-widest">Edición 2025</p>
-                 <p className="text-brand-900 font-serif font-bold italic text-xs mt-1">Redescubriéndote</p>
+            <div className="space-y-1">
+                 <p className="text-white font-serif font-bold italic text-sm">Ramón</p>
+                 <p className="text-[#d4af37] text-[8px] uppercase tracking-widest">Creador del Método</p>
             </div>
         </div>
       </div>
     )
   },
-  // PAGE 1: INDICE
+  
+  // PAGE 1: INDICE (EDITORIAL STYLE)
   {
     id: 1,
     type: 'text',
     content: (
-      <div className="h-full w-full bg-[#fdfbf7] p-6 text-gray-800 text-xs leading-relaxed relative paper-texture">
+      <div className="h-full w-full bg-[#fffcf5] p-6 text-gray-800 relative paper-texture">
         {/* Spine Shadow */}
         <div className="absolute top-0 left-0 w-12 h-full bg-gradient-to-r from-black/10 to-transparent pointer-events-none z-10"></div>
         
-        <div className="relative z-20 pl-2">
-            <h3 className="font-serif font-bold text-2xl text-brand-900 mb-6 border-b-2 border-accent-200 pb-2 inline-block">ÍNDICE</h3>
-            
-            <div className="space-y-5 font-serif">
-            <div className="group cursor-pointer">
-                <div className="flex justify-between items-baseline border-b border-gray-200 border-dotted pb-1 mb-1">
-                    <h4 className="font-bold text-brand-700 uppercase text-[10px] tracking-wider">Introducción</h4>
-                    <span className="text-gray-400 text-[10px]">03</span>
-                </div>
-                <ul className="text-[10px] text-gray-600 pl-2 space-y-1">
-                <li>• Bienvenida y filosofía</li>
-                <li>• El enemigo invisible: fatiga de decisión</li>
-                </ul>
+        <div className="relative z-20 pl-2 mt-4">
+            <div className="border-b-2 border-gray-800 pb-2 mb-6 flex justify-between items-end">
+                <h3 className="font-serif font-black text-xl text-gray-900 uppercase tracking-tighter">Contenido</h3>
+                <span className="font-serif italic text-xs text-gray-400">Vol. 1</span>
             </div>
             
-            <div className="group cursor-pointer">
-                <div className="flex justify-between items-baseline border-b border-gray-200 border-dotted pb-1 mb-1">
-                    <h4 className="font-bold text-brand-700 uppercase text-[10px] tracking-wider">Parte I: Los Pilares</h4>
-                    <span className="text-gray-400 text-[10px]">08</span>
+            <div className="space-y-6 font-serif">
+                <div className="group cursor-pointer">
+                    <div className="flex items-baseline gap-2 mb-1">
+                        <span className="font-bold text-2xl text-gray-200 group-hover:text-brand-500 transition duration-300">01</span>
+                        <h4 className="font-bold text-gray-800 text-xs uppercase tracking-wide group-hover:text-brand-700 transition">La Filosofía</h4>
+                    </div>
+                    <p className="text-[10px] text-gray-500 pl-8 leading-tight italic">
+                        Por qué fallan las dietas y cómo hackear tu cocina.
+                    </p>
                 </div>
-                <ul className="text-[10px] text-gray-600 pl-2 space-y-1">
-                <li>• Plato saludable (Harvard)</li>
-                <li>• Mitos que sabotean tu cocina</li>
-                </ul>
-            </div>
+                
+                <div className="group cursor-pointer">
+                    <div className="flex items-baseline gap-2 mb-1">
+                        <span className="font-bold text-2xl text-gray-200 group-hover:text-brand-500 transition duration-300">02</span>
+                        <h4 className="font-bold text-gray-800 text-xs uppercase tracking-wide group-hover:text-brand-700 transition">El Método 2 Horas</h4>
+                    </div>
+                    <p className="text-[10px] text-gray-500 pl-8 leading-tight italic">
+                        Paso a paso para cocinar el domingo y descansar el resto de la semana.
+                    </p>
+                </div>
 
-            <div className="group cursor-pointer">
-                <div className="flex justify-between items-baseline border-b border-gray-200 border-dotted pb-1 mb-1">
-                    <h4 className="font-bold text-brand-700 uppercase text-[10px] tracking-wider">Parte II: Planificación</h4>
-                    <span className="text-gray-400 text-[10px]">14</span>
+                <div className="group cursor-pointer">
+                    <div className="flex items-baseline gap-2 mb-1">
+                        <span className="font-bold text-2xl text-gray-200 group-hover:text-brand-500 transition duration-300">03</span>
+                        <h4 className="font-bold text-gray-800 text-xs uppercase tracking-wide group-hover:text-brand-700 transition">Secretos del Freezer</h4>
+                    </div>
+                    <p className="text-[10px] text-gray-500 pl-8 leading-tight italic">
+                        Técnicas de conservación que nadie te contó.
+                    </p>
                 </div>
-                <ul className="text-[10px] text-gray-600 pl-2 space-y-1">
-                <li>• Organización Semanal vs Mensual</li>
-                <li>• Plantillas de Menú</li>
-                </ul>
-            </div>
+
+                 <div className="mt-8 pl-4 border-l-2 border-accent-400">
+                    <p className="font-handwriting text-accent-600 text-sm rotate-[-2deg]">
+                        ¡Incluye los 10 bonos de regalo!
+                    </p>
+                </div>
             </div>
         </div>
-        <div className="absolute bottom-4 right-5 text-gray-400 font-serif font-bold text-xs">2</div>
+        <div className="absolute bottom-4 right-5 text-gray-400 font-serif font-bold text-xs">I</div>
       </div>
     )
   },
-  // PAGE 2: BIENVENIDA
+
+  // PAGE 2: DIAGRAMA VISUAL
   {
     id: 2,
     type: 'text',
     content: (
-      <div className="h-full w-full bg-[#fdfbf7] p-7 text-gray-800 flex flex-col relative paper-texture">
-         {/* Spine Shadow */}
-         <div className="absolute top-0 left-0 w-10 h-full bg-gradient-to-r from-black/10 to-transparent pointer-events-none z-10"></div>
-
-         <div className="relative z-20">
-            <div className="flex items-center gap-2 mb-6">
-                <span className="text-4xl text-accent-500 font-serif font-black opacity-20 absolute -left-2 -top-2">01</span>
-                <h3 className="font-serif font-bold text-xl text-brand-900 relative pl-6">Bienvenida</h3>
-            </div>
-            
-            <div className="space-y-4 text-[11px] leading-5 font-serif text-gray-700 text-justify">
-                <p>
-                <span className="float-left text-3xl font-black text-brand-500 mr-1 mt-[-4px]">B</span>ienvenida a <em>Cociná una vez, comé sano toda la semana</em>. Este libro es mucho más que una recopilación de recetas: es una herramienta para transformar tu vida.
-                </p>
-                
-                <p>
-                Si estás leyendo estas líneas, probablemente sientas que tu rutina diaria te deja poco espacio para pensar en comida saludable. Tal vez terminás comiendo lo primero que encontrás en la heladera.
-                </p>
-            </div>
-            
-            <div className="mt-6 bg-[#fff8f0] p-4 rounded-tl-xl rounded-br-xl border-l-4 border-accent-400 shadow-sm relative">
-                <span className="absolute -top-2 -left-2 text-2xl">📌</span>
-                <p className="text-[10px] text-gray-600 font-medium italic pl-2">
-                "La buena noticia es que no estás sola. Y aún mejor: existe una forma simple, práctica y realista de lograrlo."
-                </p>
-            </div>
-         </div>
-         <div className="absolute bottom-4 left-5 text-gray-400 font-serif font-bold text-xs">3</div>
-      </div>
-    )
-  },
-  // PAGE 3: ESTRATEGIA
-  {
-    id: 3,
-    type: 'text',
-    content: (
-      <div className="h-full w-full bg-[#fdfbf7] p-7 text-gray-800 relative paper-texture">
-        {/* Spine Shadow */}
-        <div className="absolute top-0 left-0 w-8 h-full bg-gradient-to-r from-black/5 to-transparent pointer-events-none z-10"></div>
-        
-        <div className="relative z-20">
-            <h3 className="font-serif font-bold text-lg leading-tight text-brand-900 mb-4 border-l-4 border-brand-500 pl-3">
-                Comer bien no es difícil, pero sí necesita estrategia
-            </h3>
-
-            <div className="float-right w-28 h-28 ml-3 mb-2 p-1 bg-white shadow rotate-2 transform">
-                <img src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=300" alt="Planning" className="w-full h-full object-cover grayscale hover:grayscale-0 transition" />
-            </div>
-
-            <p className="text-[11px] text-gray-700 mb-3 leading-5 text-justify font-serif">
-            La mayoría de las personas no se alimentan mal por falta de información, sino por <strong className="bg-yellow-100 px-1">falta de organización</strong>.
-            </p>
-            
-            <p className="text-[11px] text-gray-700 mb-4 leading-5 text-justify font-serif">
-            Comer saludable no es sinónimo de cocinar todos los días, ni de vivir esclava de la cocina.
-            </p>
-
-            <div className="clear-both mt-6 border-t border-b border-gray-200 py-3 text-center">
-                <p className="text-[9px] text-gray-500 uppercase tracking-widest mb-1">Dato Científico</p>
-                <p className="text-[10px] text-brand-900 font-medium italic">
-                "Planificar reduce el estrés, el gasto y los malos hábitos." (J. Ducrot et al., 2017)
-                </p>
-            </div>
-        </div>
-         <div className="absolute bottom-4 right-5 text-gray-400 font-serif font-bold text-xs">4</div>
-      </div>
-    )
-  },
-  // PAGE 4: EL ENEMIGO
-  {
-    id: 4,
-    type: 'text',
-    content: (
-      <div className="h-full w-full bg-[#fdfbf7] p-6 text-gray-800 flex flex-col items-center justify-center text-center relative overflow-hidden paper-texture">
+      <div className="h-full w-full bg-[#fffcf5] p-6 text-gray-800 flex flex-col relative paper-texture justify-center">
          {/* Spine Shadow */}
          <div className="absolute top-0 left-0 w-8 h-full bg-gradient-to-r from-black/5 to-transparent pointer-events-none z-10"></div>
 
-         <div className="absolute -top-10 -left-10 w-40 h-40 bg-red-100 rounded-full mix-blend-multiply filter blur-2xl opacity-60"></div>
-         
          <div className="relative z-20">
-            <h3 className="font-serif font-bold text-lg text-gray-900 mb-8">
-            El gran enemigo invisible:<br/> La fatiga de decidir
+            <h3 className="font-serif font-bold text-lg text-brand-900 mb-6 text-center leading-tight">
+                El Ciclo del <br/><span className="text-accent-600 bg-accent-50 px-1">Estrés Infinito</span>
             </h3>
             
-            <div className="transform hover:scale-110 transition duration-500 cursor-help relative group mb-8">
-                <span className="text-6xl font-black text-brand-900 block relative z-10">200+</span>
-                <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-8xl text-gray-100 font-black -z-10">?</span>
-                <span className="text-[10px] font-bold text-accent-600 uppercase tracking-[0.2em] bg-white px-2 relative z-10">Decisiones diarias</span>
-            </div>
-            
-            <p className="text-[11px] text-gray-600 leading-5 mb-6 max-w-[80%] mx-auto font-serif">
-            Cuando llega la noche y ya tomaste cientos de decisiones en tu trabajo y casa, tu cerebro dice "basta".
-            </p>
+            {/* Diagrama Visual */}
+            <div className="relative w-full h-48 my-4">
+                {/* Flechas Circulares */}
+                <div className="absolute inset-4 border-2 border-dashed border-gray-300 rounded-full opacity-50"></div>
+                
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-white p-2 shadow-sm border border-red-100 rounded-lg text-center w-24">
+                    <span className="text-[8px] font-bold text-gray-400 uppercase block">19:00 HS</span>
+                    <span className="text-[10px] font-bold text-red-500 leading-none">Hambre y Cansancio</span>
+                </div>
 
-            <div className="bg-red-50 border border-red-100 p-3 rounded-lg w-full shadow-sm">
-                <p className="text-[10px] font-bold text-red-800">⚠ Resultado: Pedidos, Delivery y Comida Rápida.</p>
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 bg-white p-2 shadow-sm border border-gray-200 rounded-lg text-center w-24">
+                    <span className="text-[8px] font-bold text-gray-400 uppercase block">20:30 HS</span>
+                    <span className="text-[10px] font-bold text-gray-600 leading-none">Culpa post-cena</span>
+                </div>
+
+                <div className="absolute top-1/2 right-0 translate-x-1/4 -translate-y-1/2 bg-white p-2 shadow-sm border border-gray-200 rounded-lg text-center w-20">
+                    <span className="text-[10px] font-bold text-gray-600 leading-none">Delivery Caro</span>
+                </div>
+                
+                 <div className="absolute top-1/2 left-0 -translate-x-1/4 -translate-y-1/2 bg-white p-2 shadow-sm border border-gray-200 rounded-lg text-center w-20">
+                    <span className="text-[10px] font-bold text-gray-600 leading-none">Cocinar sin ganas</span>
+                </div>
+                
+                {/* Center Text */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center bg-white/80 p-2 rounded-full">
+                    <p className="font-handwriting text-red-600 text-lg rotate-[-5deg] whitespace-nowrap">¿Te suena?</p>
+                </div>
             </div>
+
+            <p className="text-[10px] text-gray-600 text-justify font-serif leading-4 mt-6 px-2">
+                Este ciclo se repite 365 veces al año. Te roba energía, dinero y salud. En la página 12 te enseño cómo romperlo para siempre.
+            </p>
          </div>
          <div className="absolute bottom-4 left-5 text-gray-400 font-serif font-bold text-xs">5</div>
       </div>
     )
   },
-   // PAGE 5: FINAL CTA
+
+  // PAGE 3: RECETA TEASER (BLURRED)
+  {
+    id: 3,
+    type: 'text',
+    content: (
+      <div className="h-full w-full bg-[#fffcf5] relative paper-texture overflow-hidden flex flex-col">
+        {/* Spine Shadow */}
+        <div className="absolute top-0 left-0 w-8 h-full bg-gradient-to-r from-black/5 to-transparent pointer-events-none z-10"></div>
+        
+        <div className="relative z-0 h-1/2 w-full">
+            {/* FIXED IMAGE: Specific Lemon Chicken/Gourmet Dish */}
+            <img 
+                src="https://images.unsplash.com/photo-1632778149955-e80f8ceca2e8?auto=format&fit=crop&w=500&q=80" 
+                className="w-full h-full object-cover object-center" 
+                alt="Pollo al Limón Gourmet" 
+            />
+            <div className="absolute bottom-0 w-full h-12 bg-gradient-to-t from-[#fffcf5] to-transparent"></div>
+            
+            <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded shadow text-[10px] font-bold text-brand-700 uppercase tracking-wider border border-brand-100">
+                Receta Exclusiva
+            </div>
+        </div>
+
+        <div className="p-6 relative z-10 flex-1">
+            <h3 className="font-serif font-bold text-xl text-gray-900 mb-2 leading-tight">
+                Pollo al Limón (Freezer-Friendly)
+            </h3>
+            <div className="flex gap-4 text-[9px] text-gray-500 uppercase tracking-widest mb-4">
+                <span>Prep: 10 min</span>
+                <span>•</span>
+                <span>Cocción: 20 min</span>
+            </div>
+
+            {/* Blurred Content */}
+            <div className="space-y-3 select-none filter blur-[3px] opacity-60">
+                <p className="text-[11px] text-gray-800 leading-snug">1. Cortar las pechugas en cubos de 2x2 cm asegurando uniformidad para la cocción.</p>
+                <p className="text-[11px] text-gray-800 leading-snug">2. Mezclar en un bowl el jugo de limón, la miel y las especias secretas...</p>
+                <p className="text-[11px] text-gray-800 leading-snug">3. Guardar en bolsa ziploc eliminando todo el aire y llevar al freezer etiquetado.</p>
+                <p className="text-[11px] text-gray-800 leading-snug">4. El secreto para que no se seque al descongelar es...</p>
+            </div>
+
+            {/* Locked Message */}
+            <div className="absolute inset-0 top-1/3 flex items-center justify-center">
+                <div className="bg-white/95 border border-brand-200 shadow-xl p-4 rounded-xl text-center transform rotate-2 max-w-[85%]">
+                    <div className="mx-auto bg-brand-100 w-8 h-8 rounded-full flex items-center justify-center mb-2">
+                        <ChefHat className="w-4 h-4 text-brand-600" />
+                    </div>
+                    <p className="font-serif font-bold text-gray-900 text-sm mb-1">Secreto de Chef</p>
+                    <p className="text-[10px] text-gray-500 leading-tight">
+                        Accedé al libro completo para ver esta receta y 50+ opciones listas para congelar.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div className="absolute bottom-4 right-5 text-gray-400 font-serif font-bold text-xs">18</div>
+      </div>
+    )
+  },
+
+   // PAGE 4: CTA FINAL (VAULT)
    {
-    id: 5,
+    id: 4,
     type: 'cta',
     content: (
-      <div className="h-full w-full bg-brand-900 flex flex-col items-center justify-center p-6 text-center relative shadow-inner">
-         <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
-         {/* Spine Shadow for Cover */}
-         <div className="absolute top-0 left-0 w-4 h-full bg-gradient-to-r from-black/30 to-transparent pointer-events-none z-10"></div>
+      <div className="h-full w-full bg-[#111827] flex flex-col items-center justify-center p-6 text-center relative shadow-inner overflow-hidden">
+         {/* Background Patterns */}
+         <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+         <div className="absolute top-0 left-0 w-4 h-full bg-gradient-to-r from-black/50 to-transparent pointer-events-none z-10"></div>
          
-         <div className="relative z-20 border-4 border-brand-700 p-6 rounded-lg bg-brand-800/50 backdrop-blur-sm">
-            <h3 className="text-white font-serif text-2xl font-bold mb-4 leading-tight">
-            ¿Querés seguir leyendo?
+         {/* Gold Border */}
+         <div className="absolute inset-4 border border-white/10 rounded-lg pointer-events-none"></div>
+
+         <div className="relative z-20 max-w-[240px]">
+            <div className="w-16 h-16 bg-accent-500 rounded-full mx-auto mb-6 flex items-center justify-center shadow-[0_0_30px_rgba(245,158,11,0.5)] animate-pulse">
+                <Bookmark className="w-8 h-8 text-white fill-current" />
+            </div>
+
+            <h3 className="text-white font-serif text-xl font-bold mb-3 leading-tight">
+                Tu copia te está esperando
             </h3>
             
-            <div className="w-16 h-1 bg-accent-500 mx-auto mb-6"></div>
-
-            <p className="text-brand-100 text-xs mb-8 leading-relaxed font-light">
-            Accedé a las <strong>140 páginas</strong> restantes, las plantillas, los menús y los 10 bonos exclusivos.
+            <p className="text-gray-400 text-xs mb-8 leading-relaxed">
+                Desbloqueá las <strong>150 páginas</strong>, las plantillas imprimibles y recuperá tu libertad en la cocina hoy mismo.
             </p>
             
             <button 
                 onClick={() => document.getElementById('offer')?.scrollIntoView({behavior: 'smooth'})}
-                className="bg-accent-500 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-accent-400 transition transform hover:-translate-y-1 text-xs tracking-wider uppercase"
+                className="group w-full bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-400 hover:to-brand-500 text-white font-bold py-3 px-4 rounded-lg shadow-lg transform transition hover:-translate-y-1 text-xs uppercase tracking-wider flex items-center justify-center gap-2"
             >
-            Descargar Completo
+                <span>Obtener Acceso Total</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
             </button>
+            
+            <p className="mt-4 text-[9px] text-gray-600 uppercase tracking-widest">
+                Descarga Inmediata
+            </p>
          </div>
       </div>
     )
@@ -244,76 +281,93 @@ const InsideLook: React.FC = () => {
   };
 
   return (
-    <section className="py-24 bg-[#2d3748] overflow-hidden min-h-[800px] flex flex-col items-center justify-center relative">
+    <section className="py-24 bg-[#1f2937] overflow-hidden min-h-[900px] flex flex-col items-center justify-center relative">
        
-       {/* Background Elements (Wood Texture Illusion) */}
-       <div className="absolute inset-0 bg-[#1a202c]"></div>
-       <div className="absolute inset-0 opacity-30 bg-[url('https://www.transparenttextures.com/patterns/wood-pattern.png')]"></div>
-       <div className="absolute inset-0 bg-gradient-to-b from-[#1a202c] via-transparent to-[#1a202c] opacity-80"></div>
+       {/* LUXURY AMBIENCE */}
+       <div className="absolute inset-0 bg-[#0f172a]"></div>
+       <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/wood-pattern.png')]"></div>
+       {/* Spotlight effect */}
+       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-900/40 rounded-full blur-[120px] pointer-events-none"></div>
 
-       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex flex-col items-center">
+       <div className="max-w-7xl mx-auto px-4 relative z-10 w-full flex flex-col items-center">
           
-          <div className="text-center mb-12">
-             <span className="text-accent-400 font-bold tracking-widest uppercase text-xs">Experiencia Interactiva</span>
-             <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mt-3">
-                Espiá el contenido por dentro
+          <div className="text-center mb-16 space-y-4">
+             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 shadow-lg backdrop-blur-sm animate-fade-in-up">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-accent-500"></span>
+                </span>
+                <span className="text-accent-400 text-[10px] font-bold tracking-widest uppercase">
+                    Tour Virtual Interactivo
+                </span>
+             </div>
+             
+             <h2 className="text-3xl md:text-5xl font-serif font-bold text-white drop-shadow-lg max-w-2xl mx-auto leading-tight">
+                Espiá el contenido por dentro...
              </h2>
-             <p className="text-gray-400 text-sm mt-2">Hacé click en las páginas para leer</p>
+             
+             <p className="text-gray-400 text-sm md:text-base font-light flex items-center justify-center gap-2">
+                <MousePointerClick className="w-4 h-4" />
+                Hacé click en las páginas para hojear el libro
+             </p>
           </div>
 
-          {/* BOOK CONTAINER */}
-          <div className="relative w-[320px] h-[460px] sm:w-[380px] sm:h-[540px] perspective-2000 mx-auto mb-12">
+          {/* 3D BOOK STAGE */}
+          <div className="relative w-[320px] h-[480px] sm:w-[400px] sm:h-[600px] perspective-2000 mx-auto mb-12 select-none max-w-[90vw]">
              
-             {/* Book Shadow on Table */}
-             <div className="absolute bottom-[-20px] left-[5%] w-[90%] h-[20px] bg-black/40 blur-xl rounded-[50%] z-0 transition-all duration-500"
-                  style={{ transform: `scaleX(${currentPage > 0 ? 1.8 : 1})` }}></div>
+             {/* Realistic Shadow Casting */}
+             <div className="absolute bottom-[-40px] left-[10%] w-[80%] h-[40px] bg-black/50 blur-2xl rounded-[100%] transition-all duration-700"
+                  style={{ 
+                      transform: `scaleX(${currentPage > 0 ? 1.6 : 1})`,
+                      opacity: currentPage > 0 ? 0.4 : 0.6
+                  }}></div>
 
-             {/* Pages Stack */}
+             {/* PAGES CONTAINER */}
              <div className="relative w-full h-full transform-style-3d transition-transform duration-700 ease-out">
                 
+                {/* Ribbon Bookmark */}
+                <div className="absolute -top-2 left-8 w-6 h-24 bg-red-600 shadow-md z-[60] rounded-b-lg transform origin-top hover:scale-y-110 transition duration-300 border-t-2 border-red-800 pointer-events-none">
+                    <div className="absolute bottom-0 left-0 w-full h-4 bg-red-800/20 skew-y-12"></div>
+                </div>
+
                 {BOOK_PAGES.map((page, index) => {
                    const isFlipped = index < currentPage;
+                   // FIX: Better stacking calculation to prevent z-fighting
                    const zIndex = isFlipped ? index : totalPages - index;
                    const rotation = isFlipped ? -180 : 0;
                    
                    return (
                       <div 
                         key={page.id}
-                        className={`absolute top-0 left-0 w-full h-full origin-left transition-all duration-1000 ease-in-out cursor-pointer rounded-r-md bg-[#fdfbf7]`}
+                        className="absolute top-0 left-0 w-full h-full origin-left transition-all duration-1000 ease-in-out cursor-pointer rounded-r-md bg-[#fdfbf7]"
                         style={{ 
-                            transform: `rotateY(${rotation}deg)`,
+                            transform: `rotateY(${rotation}deg) translateZ(${isFlipped ? 2 : 0}px)`, // Slight Z offset to prevent clipping
                             zIndex: zIndex,
                             transformStyle: 'preserve-3d',
-                            // Improved shadow logic for depth perception
                             boxShadow: isFlipped 
-                                ? '5px 0 15px rgba(0,0,0,0.1)' // Shadow on the left when flipped
-                                : '-1px 0 2px rgba(0,0,0,0.1), 5px 5px 15px rgba(0,0,0,0.2)' // Shadow on the right when closed
+                                ? '5px 0 20px rgba(0,0,0,0.1)' 
+                                : '-1px 0 2px rgba(0,0,0,0.2), 5px 5px 15px rgba(0,0,0,0.3)'
                         }}
                         onClick={() => {
-                            if (isFlipped) {
-                                setCurrentPage(index); 
-                            } else {
-                                setCurrentPage(index + 1); 
-                            }
+                            if (isFlipped) setCurrentPage(index); 
+                            else setCurrentPage(index + 1); 
                         }}
                       >
-                         {/* FRONT OF PAGE */}
-                         <div className="absolute inset-0 w-full h-full backface-hidden rounded-r-md overflow-hidden bg-[#fdfbf7]">
-                            {/* Subtle grain texture overlay */}
+                         {/* FRONT FACE */}
+                         <div className="absolute inset-0 w-full h-full backface-hidden rounded-r-sm overflow-hidden bg-[#fdfbf7]">
                             <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/cream-paper.png')] pointer-events-none"></div>
+                            {/* Inner Spine Gradient for realism */}
+                            <div className="absolute left-0 top-0 bottom-0 w-6 bg-gradient-to-r from-black/10 to-transparent pointer-events-none z-20"></div>
                             {page.content}
                          </div>
 
-                         {/* BACK OF PAGE (The "Paper" back side) */}
+                         {/* BACK FACE */}
                          <div 
-                            className="absolute inset-0 w-full h-full backface-hidden bg-[#f7f5f0] rounded-l-md overflow-hidden flex items-center justify-center transform rotate-y-180 border-r border-gray-200"
+                            className="absolute inset-0 w-full h-full backface-hidden bg-[#f0ede6] rounded-l-sm overflow-hidden flex items-center justify-center border-r border-gray-300"
                             style={{ transform: 'rotateY(180deg)' }}
                          >
-                             {/* Realistic shadow gradient near spine on back side */}
-                             <div className="absolute top-0 right-0 w-12 h-full bg-gradient-to-l from-black/10 to-transparent pointer-events-none"></div>
-                             
-                             {/* See-through text effect (flipped) */}
-                             <div className="opacity-5 transform scale-x-[-1] blur-[0.5px]">
+                             <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-black/10 to-transparent pointer-events-none"></div>
+                             <div className="opacity-[0.06] transform scale-x-[-1] blur-[1px] grayscale p-4 w-full h-full">
                                  {page.content}
                              </div>
                          </div>
@@ -321,71 +375,82 @@ const InsideLook: React.FC = () => {
                    );
                 })}
 
-                {/* Fake Back Cover (Static base) to give volume */}
-                <div className="absolute top-0 left-0 w-full h-full bg-white rounded-r-md transform translate-z--2px border border-gray-300" style={{ zIndex: -1 }}></div>
-                <div className="absolute top-1 left-0 w-full h-full bg-white rounded-r-md transform translate-z--4px border border-gray-300" style={{ zIndex: -2 }}></div>
-                <div className="absolute top-2 left-0 w-full h-full bg-brand-900 rounded-r-md transform translate-z--6px shadow-2xl" style={{ zIndex: -3 }}></div>
+                {/* PHYSICAL BOOK THICKNESS (Static) */}
+                <div className="absolute top-0 left-0 w-full h-full bg-white rounded-r-md transform translate-z--2px border border-gray-400" style={{ zIndex: -1 }}></div>
+                <div className="absolute top-1 left-0 w-full h-full bg-[#1a3624] rounded-r-md transform translate-z--4px border border-gray-800" style={{ zIndex: -2 }}></div>
+                <div className="absolute top-2 left-0 w-full h-full bg-[#0d1f14] rounded-r-md transform translate-z--8px shadow-2xl" style={{ zIndex: -3 }}></div>
                 
-                {/* Book Side Spine Effect (Visible when book is closed/semi-open) */}
-                <div className={`absolute top-0 left-0 w-8 h-full bg-brand-800 transform -translate-x-full origin-right transition-opacity duration-500 rounded-l-sm flex flex-col justify-center items-center shadow-lg ${currentPage > 0 ? 'opacity-0' : 'opacity-100'}`}>
-                    <span className="text-white/30 text-[8px] uppercase tracking-widest rotate-[-90deg] whitespace-nowrap w-40 text-center">Cocina Resuelta</span>
+                {/* 3D SPINE (Visible when closed) */}
+                <div 
+                    className="absolute top-0 left-0 w-12 h-full bg-[#0f241a] transform -translate-x-full origin-right transition-all duration-700 rounded-l-md flex flex-col justify-center items-center shadow-2xl border-r border-white/10"
+                    style={{
+                         opacity: currentPage > 0 ? 0 : 1,
+                         pointerEvents: currentPage > 0 ? 'none' : 'auto'
+                    }}
+                >
+                    <div className="h-full w-full absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/black-scales.png')] opacity-30 mix-blend-overlay"></div>
+                    {/* Spine Text */}
+                    <span className={`text-[#d4af37] text-[10px] font-serif font-bold tracking-[0.4em] uppercase rotate-[-90deg] whitespace-nowrap w-64 text-center drop-shadow-md`}>
+                        Cocina Resuelta
+                    </span>
+                    {/* Spine Decorative Lines */}
+                    <div className="absolute top-12 w-full h-[1px] bg-[#d4af37]/40"></div>
+                    <div className="absolute top-14 w-full h-[1px] bg-[#d4af37]/40"></div>
+                    <div className="absolute bottom-12 w-full h-[1px] bg-[#d4af37]/40"></div>
+                    <div className="absolute bottom-14 w-full h-[1px] bg-[#d4af37]/40"></div>
                 </div>
 
              </div>
           </div>
 
-          {/* Navigation Controls */}
-          <div className="flex items-center gap-6 mt-8 bg-white/5 px-6 py-3 rounded-full backdrop-blur-sm border border-white/10">
+          {/* NAVIGATION CONTROLS */}
+          <div className="flex items-center gap-8 mt-4">
               <button 
                 onClick={prevPage}
                 disabled={currentPage === 0}
-                className={`p-2 rounded-full hover:bg-white/10 text-white transition disabled:opacity-30 ${currentPage === 0 ? 'cursor-not-allowed' : ''}`}
+                className={`group flex items-center gap-3 text-white/50 hover:text-white transition disabled:opacity-20 ${currentPage === 0 ? 'cursor-not-allowed' : ''}`}
               >
-                  <ChevronLeft className="w-5 h-5" />
+                  <div className="p-3 rounded-full border border-white/10 group-hover:border-accent-500/50 group-hover:bg-accent-500/10 transition">
+                    <ChevronLeft className="w-5 h-5 group-hover:text-accent-400" />
+                  </div>
+                  <span className="text-xs font-medium tracking-widest uppercase hidden sm:block">Anterior</span>
               </button>
               
-              <div className="text-white/70 text-xs font-mono tracking-wider">
-                  PÁGINA {currentPage} / {totalPages}
+              <div className="flex flex-col items-center px-6 border-x border-white/10">
+                  <span className="text-white font-serif text-2xl font-bold">
+                      {String(currentPage + 1).padStart(2, '0')}
+                  </span>
+                  <span className="text-[9px] text-gray-500 uppercase tracking-widest">
+                      de {String(totalPages).padStart(2, '0')}
+                  </span>
               </div>
 
               <button 
                 onClick={nextPage}
                 disabled={currentPage === totalPages}
-                className={`p-2 rounded-full hover:bg-white/10 text-white transition disabled:opacity-30 ${currentPage === totalPages ? 'cursor-not-allowed' : ''}`}
+                className={`group flex items-center gap-3 text-white/50 hover:text-white transition disabled:opacity-20 ${currentPage === totalPages ? 'cursor-not-allowed' : ''}`}
               >
-                  <ChevronRight className="w-5 h-5" />
+                  <span className="text-xs font-medium tracking-widest uppercase hidden sm:block">Siguiente</span>
+                  <div className="p-3 rounded-full border border-white/10 group-hover:border-accent-500/50 group-hover:bg-accent-500/10 transition">
+                    <ChevronRight className="w-5 h-5 group-hover:text-accent-400" />
+                  </div>
               </button>
           </div>
 
        </div>
 
        <style>{`
-        .perspective-2000 {
-            perspective: 2000px;
-        }
-        .transform-style-3d {
-            transform-style: preserve-3d;
-        }
-        .backface-hidden {
-            backface-visibility: hidden;
-        }
-        .rotate-y-180 {
-            transform: rotateY(180deg);
-        }
-        .custom-scrollbar::-webkit-scrollbar {
-          width: 3px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-          background: transparent; 
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: #d1d5db; 
-          border-radius: 10px;
-        }
-        /* Optional: Paper Texture class if needed for overrides */
+        .perspective-2000 { perspective: 2000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .translate-z--2px { transform: translateZ(-2px); }
+        .translate-z--4px { transform: translateZ(-4px); }
+        .translate-z--8px { transform: translateZ(-8px); }
         .paper-texture {
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
         }
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
+        .font-handwriting { font-family: 'Caveat', cursive; }
       `}</style>
     </section>
   );
