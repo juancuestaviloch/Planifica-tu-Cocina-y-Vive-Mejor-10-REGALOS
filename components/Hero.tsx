@@ -1,10 +1,11 @@
 
 import React, { useEffect, useState } from 'react';
-import { ArrowRight, Star, CreditCard, Zap, Banknote, ChevronDown, ArrowDown } from 'lucide-react';
-import { CHECKOUT_URL, MAIN_PRODUCT } from '../constants';
+import { ArrowRight, Star, CreditCard, Zap, Banknote, Users } from 'lucide-react';
+import { MAIN_PRODUCT } from '../constants';
 
 const Hero: React.FC = () => {
   const [currentDate, setCurrentDate] = useState('');
+  const [viewers, setViewers] = useState(12);
 
   useEffect(() => {
     const date = new Date();
@@ -12,6 +13,16 @@ const Hero: React.FC = () => {
     const month = date.toLocaleDateString('es-AR', { month: 'long' });
     const capitalizedMonth = month.charAt(0).toUpperCase() + month.slice(1);
     setCurrentDate(`${day} de ${capitalizedMonth}`);
+
+    // Simulate live viewers fluctuation
+    const interval = setInterval(() => {
+        setViewers(prev => {
+            const change = Math.floor(Math.random() * 3) - 1; // -1, 0, or 1
+            return Math.min(Math.max(prev + change, 8), 25);
+        });
+    }, 5000);
+
+    return () => clearInterval(interval);
   }, []);
 
   const scrollToOffer = () => {
@@ -105,7 +116,22 @@ const Hero: React.FC = () => {
                 src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?q=80&w=2070&auto=format&fit=crop" 
                 alt="Meal Prep Containers" 
               />
-              {/* Floating Badge */}
+              
+              {/* Floating Social Proof Badge */}
+              <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur px-4 py-3 rounded-xl shadow-lg border border-gray-100 z-20 flex items-center gap-3 animate-in slide-in-from-bottom-5 fade-in duration-1000">
+                  <div className="relative">
+                      <Users className="w-5 h-5 text-brand-600" />
+                      <span className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                  </div>
+                  <div>
+                      <p className="text-xs font-bold text-gray-800">Alta demanda:</p>
+                      <p className="text-[10px] text-gray-500">
+                        <span className="font-bold text-brand-600">{viewers} personas</span> están viendo esta oferta
+                      </p>
+                  </div>
+              </div>
+
+              {/* Top Badge */}
               <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-4 py-2 rounded-lg shadow-lg border border-gray-100 z-20">
                   <p className="font-bold text-brand-700 text-xs uppercase tracking-wider">Edición 2025</p>
               </div>
