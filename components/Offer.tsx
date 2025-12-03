@@ -1,153 +1,222 @@
 
-import React from 'react';
-import { MAIN_PRODUCT, BONUSES, CHECKOUT_URL } from '../constants';
-import { Check, ArrowRight, Lock, Book, Smartphone, Tablet, CreditCard, Banknote, ShieldCheck, Plus, Gift } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { MAIN_PRODUCT, CHECKOUT_URL, BONUSES } from '../constants';
+import { Check, ArrowRight, ShieldCheck, CreditCard, MessageCircle, Clock, Zap } from 'lucide-react';
 
 const Offer: React.FC = () => {
-  // Calcular valor total real (Suma de bonos + precio original)
-  const calculateTotalValue = () => {
-    let total = MAIN_PRODUCT.originalPrice;
-    BONUSES.forEach(bonus => {
-        // Extraer números del string de valor (ej: "$18.000" -> 18000)
-        const valueString = bonus.value.replace(/[^0-9]/g, '');
-        const value = parseInt(valueString, 10);
-        if (!isNaN(value)) {
-            total += value;
-        }
-    });
-    return total;
+  // Timer Logic (Persistente en localStorage para esta sección)
+  const [timeLeft, setTimeLeft] = useState(600); // 10 minutes in seconds
+
+  useEffect(() => {
+    const savedTime = localStorage.getItem('cocina-offer-timer-dark');
+    const now = Date.now();
+    
+    if (savedTime) {
+      const { target } = JSON.parse(savedTime);
+      const remaining = Math.max(0, Math.floor((target - now) / 1000));
+      setTimeLeft(remaining);
+    } else {
+      const target = now + 600 * 1000;
+      localStorage.setItem('cocina-offer-timer-dark', JSON.stringify({ target }));
+    }
+
+    const interval = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 0) return 0;
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const formatTime = (seconds: number) => {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
   };
 
-  const totalValue = calculateTotalValue();
+  // Precios Dinámicos basados en constants.ts
+  const transferDiscount = 0.20; // 20% OFF
+  const transferPrice = MAIN_PRODUCT.price * (1 - transferDiscount);
+  const transferSavings = MAIN_PRODUCT.price - transferPrice;
+
+  // WhatsApp Link Logic
+  const waNumber = "5492236885623";
+  const waMessage = `Hola Ramón, quiero aprovechar el 20% OFF por transferencia para el Sistema Cocina Resuelta. ¿Me pasas el CBU? El precio sería $${transferPrice.toLocaleString('es-AR')}.`;
+  const waLink = `https://wa.me/${waNumber}?text=${encodeURIComponent(waMessage)}`;
 
   return (
-    <section id="offer" className="py-16 md:py-24 bg-brand-900 relative overflow-hidden">
-       <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/food.png')]"></div>
+    <section id="offer" className="py-20 bg-[#020617] font-sans text-white relative overflow-hidden">
+      
+      {/* Background Ambience (Dark Mode Fintech Style) */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-[120px]"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px]"></div>
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
+      </div>
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Main Offer Container */}
-        <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border-4 border-accent-500 ring-4 ring-accent-500/20">
-          
-          {/* Header Strip */}
-          <div className="bg-gradient-to-r from-red-600 to-red-500 p-4 text-center relative overflow-hidden animate-pulse">
-            <h2 className="text-xl md:text-2xl font-black text-white uppercase tracking-wider drop-shadow-md flex items-center justify-center gap-2">
-              <Gift className="w-6 h-6" /> ¡OFERTA FINAL - SE TERMINA EL TIEMPO!
-            </h2>
-          </div>
-          
-          <div className="grid lg:grid-cols-2">
-            
-            {/* Left Column: The "Receipt" (Value Stack) */}
-            <div className="p-6 md:p-8 bg-gray-50 border-r border-gray-200">
-                <h3 className="text-2xl font-serif font-bold text-gray-800 mb-6 text-center">
-                    ¿Qué incluye tu acceso?
-                </h3>
-
-                <div className="space-y-4 text-sm">
-                    {/* Main Product */}
-                    <div className="flex justify-between items-center border-b border-gray-200 pb-3">
-                        <div className="flex items-start gap-3">
-                            <Book className="w-5 h-5 text-brand-600 flex-shrink-0 mt-0.5" />
-                            <div>
-                                <span className="font-bold text-gray-900 block">Sistema "Cocina Resuelta" (eBook)</span>
-                                <span className="text-xs text-gray-500">El método completo paso a paso</span>
-                            </div>
-                        </div>
-                        <span className="font-bold text-gray-400 decoration-gray-400 line-through">
-                            ${MAIN_PRODUCT.originalPrice.toLocaleString('es-AR')}
-                        </span>
-                    </div>
-
-                    {/* Bonuses Summary */}
-                    {BONUSES.map((bonus, idx) => (
-                        <div key={idx} className="flex justify-between items-center border-b border-gray-200 pb-2 border-dashed last:border-0">
-                            <div className="flex items-start gap-3">
-                                <Plus className="w-4 h-4 text-accent-500 flex-shrink-0 mt-0.5" />
-                                <span className="text-gray-700">{bonus.title.split(':')[0]}</span>
-                            </div>
-                            <span className="font-medium text-gray-400 decoration-gray-400 line-through text-xs">
-                                {bonus.value.replace('Valor Real: ', '')}
-                            </span>
-                        </div>
-                    ))}
+        {/* Header Section */}
+        <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-3 bg-slate-800/50 border border-slate-700 rounded-full px-6 py-2 mb-6 backdrop-blur-md shadow-lg">
+                <div className="relative">
+                    <div className="absolute inset-0 bg-red-500 blur-sm rounded-full animate-pulse"></div>
+                    <Clock className="w-5 h-5 text-red-500 relative z-10" />
                 </div>
-
-                {/* Total Value Calculation */}
-                <div className="mt-6 bg-gray-200 p-4 rounded-xl flex justify-between items-center">
-                    <span className="font-black text-gray-700 uppercase tracking-widest">Valor Total Real</span>
-                    <span className="font-black text-xl text-gray-500 decoration-gray-500 line-through">
-                        ${totalValue.toLocaleString('es-AR')}
-                    </span>
-                </div>
+                <span className="text-red-400 font-bold tracking-widest uppercase text-xs">Oferta Flash</span>
+                <div className="w-px h-4 bg-slate-600"></div>
+                <span className="font-mono text-xl font-black text-white tracking-widest">
+                    {formatTime(timeLeft)}
+                </span>
             </div>
 
-            {/* Right Column: Pricing & CTA */}
-            <div className="p-6 md:p-8 flex flex-col justify-center bg-white relative">
-                
-                <div className="absolute top-4 right-4 animate-bounce">
-                    <span className="bg-red-100 text-red-600 text-xs font-bold px-2 py-1 rounded border border-red-200">
-                        AHORRAS ${(totalValue - MAIN_PRODUCT.price).toLocaleString('es-AR')}
+            <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400 font-serif">
+                Elegí tu método de acceso
+            </h2>
+            <p className="text-slate-400 max-w-2xl mx-auto text-lg font-light">
+                Comenzá hoy mismo a transformar tu cocina. Acceso inmediato, de por vida y con garantía total.
+            </p>
+        </div>
+
+        {/* Pricing Cards Grid */}
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto items-stretch">
+
+            {/* CARD 1: LIST PRICE (TARJETA/SHOPIFY) */}
+            <div className="bg-[#0f172a] border border-slate-800 rounded-3xl p-8 relative hover:border-slate-600 transition duration-300 flex flex-col h-full shadow-2xl group">
+                <div className="mb-6">
+                    <span className="text-slate-400 font-bold text-xs uppercase tracking-wider flex items-center gap-2">
+                        <CreditCard className="w-4 h-4" />
+                        Precio de Lista
                     </span>
+                    <h3 className="text-white font-bold text-xl mt-2">Tarjeta / Cuotas</h3>
                 </div>
 
-                <div className="text-center mb-8 mt-4">
-                    <p className="text-gray-500 font-medium mb-2 uppercase tracking-wide text-xs">Precio de Oferta Hoy</p>
-                    <div className="flex justify-center items-start gap-1">
-                        <span className="text-4xl text-gray-400 font-light mt-2">$</span>
-                        <span className="text-7xl font-black text-brand-600 tracking-tighter leading-none">
-                            {MAIN_PRODUCT.price.toLocaleString('es-AR', { useGrouping: true }).replace('$','')}
-                        </span>
+                <div className="mb-8">
+                    <div className="flex items-baseline gap-1">
+                        <span className="text-4xl font-black text-white tracking-tight">${MAIN_PRODUCT.price.toLocaleString('es-AR')}</span>
+                        <span className="text-lg text-slate-500 font-medium">ARS</span>
                     </div>
-                    <p className="text-sm text-green-600 font-bold bg-green-50 inline-block px-3 py-1 rounded-full mt-2 border border-green-100">
-                        Pago Único - Acceso de por vida
+                    <p className="text-slate-500 text-xs mt-2 line-through">
+                        Antes: ${MAIN_PRODUCT.originalPrice.toLocaleString('es-AR')}
                     </p>
                 </div>
 
-                {/* CTA Button */}
+                <ul className="space-y-4 mb-8 flex-1">
+                    <li className="flex items-start gap-3">
+                        <div className="bg-slate-800 p-1 rounded-full"><Check className="w-3 h-3 text-white" /></div>
+                        <span className="text-slate-300 text-sm">Acceso inmediato al sistema (Automático)</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                        <div className="bg-slate-800 p-1 rounded-full"><Check className="w-3 h-3 text-white" /></div>
+                        <span className="text-slate-300 text-sm">Todos los {BONUSES.length} bonos incluidos</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                        <div className="bg-slate-800 p-1 rounded-full"><Check className="w-3 h-3 text-white" /></div>
+                        <span className="text-slate-300 text-sm">Hasta 3 cuotas sin interés</span>
+                    </li>
+                </ul>
+
                 <a 
                     href={CHECKOUT_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full bg-accent-500 hover:bg-accent-600 text-white font-bold text-xl py-5 px-6 rounded-xl shadow-xl shadow-accent-500/40 transform transition hover:-translate-y-1 flex items-center justify-center gap-2 group mb-4 relative overflow-hidden"
+                    className="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold py-4 rounded-xl transition border border-slate-700 flex items-center justify-center gap-2 group-hover:shadow-lg group-hover:shadow-slate-500/10"
                 >
-                    <span className="relative z-10">¡LO QUIERO TODO YA!</span>
-                    <ArrowRight className="w-6 h-6 relative z-10 group-hover:translate-x-1 transition" />
-                    {/* Shine effect */}
-                    <div className="absolute top-0 -left-[100%] w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 animate-[shimmer_2s_infinite]"></div>
+                    PAGAR CON TARJETA
+                    <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-white transition" />
                 </a>
-
-                {/* Payment Methods */}
-                <div className="space-y-3">
-                    <div className="flex items-center justify-center gap-2 text-xs text-gray-500 bg-gray-50 p-2 rounded-lg">
-                        <CreditCard className="w-4 h-4 text-blue-600" />
-                        <span>3 Cuotas <strong>Sin Interés</strong></span>
-                    </div>
-                    <div className="flex items-center justify-center gap-2 text-xs text-gray-500 bg-gray-50 p-2 rounded-lg">
-                        <Banknote className="w-4 h-4 text-green-600" />
-                        <span>-10% extra con Transferencia</span>
-                    </div>
-                </div>
-
-                <div className="mt-6 flex justify-center gap-4 opacity-50 grayscale hover:grayscale-0 transition duration-500">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Mastercard_2019_logo.svg" alt="Mastercard" className="h-6"/>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" className="h-6"/>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d1/MercadoPago_Logo.png" alt="MercadoPago" className="h-6"/>
-                </div>
-
-                <div className="mt-6 text-center">
-                    <div className="flex items-center justify-center gap-1 text-[10px] text-gray-400">
-                        <Lock className="w-3 h-3" />
-                        <span>Pago procesado con seguridad SSL de 256-bits</span>
-                    </div>
-                </div>
-
             </div>
 
-          </div>
+            {/* CARD 2: TRANSFER (WHATSAPP) - HIGHLIGHTED */}
+            <div className="bg-[#0f172a] border-2 border-emerald-500 rounded-3xl p-8 relative shadow-[0_0_40px_rgba(16,185,129,0.1)] transform md:scale-105 z-10 flex flex-col h-full">
+                
+                {/* Badge */}
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-emerald-500 text-[#020617] font-black text-[10px] uppercase tracking-widest px-4 py-1.5 rounded-full shadow-lg flex items-center gap-1 whitespace-nowrap">
+                    <Zap className="w-3 h-3 fill-current" /> RECOMENDADO
+                </div>
+
+                <div className="mb-6">
+                    <span className="text-emerald-400 font-bold text-xs uppercase tracking-wider flex items-center gap-2">
+                        <Zap className="w-4 h-4" />
+                        Transferencia Bancaria
+                    </span>
+                    <div className="flex items-center gap-2 mt-2">
+                        <span className="text-emerald-500 text-xs font-bold bg-emerald-500/10 px-2 py-1 rounded border border-emerald-500/20">
+                            🚀 20% OFF EXTRA
+                        </span>
+                    </div>
+                </div>
+
+                <div className="mb-8">
+                    <p className="text-slate-500 text-sm line-through decoration-slate-500 mb-1">
+                        ${MAIN_PRODUCT.price.toLocaleString('es-AR')}
+                    </p>
+                    <div className="flex items-baseline gap-1">
+                        <span className="text-5xl font-black text-white tracking-tight">${transferPrice.toLocaleString('es-AR')}</span>
+                        <span className="text-xl text-slate-500 font-medium">ARS</span>
+                    </div>
+                    <p className="text-emerald-400 text-xs mt-2 font-bold">
+                        Te ahorrás ${transferSavings.toLocaleString('es-AR')} adicionales
+                    </p>
+                </div>
+
+                <ul className="space-y-4 mb-8 flex-1">
+                    <li className="flex items-start gap-3">
+                        <div className="bg-emerald-500/20 p-1 rounded-full"><Check className="w-3 h-3 text-emerald-400" /></div>
+                        <span className="text-white text-sm font-medium">Descuento aplicado sobre la oferta</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                        <div className="bg-emerald-500/20 p-1 rounded-full"><Check className="w-3 h-3 text-emerald-400" /></div>
+                        <span className="text-white text-sm font-medium">Acceso digital rápido (Envío manual)</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                        <div className="bg-emerald-500/20 p-1 rounded-full"><Check className="w-3 h-3 text-emerald-400" /></div>
+                        <span className="text-white text-sm font-medium">Atención directa por WhatsApp</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                        <div className="bg-emerald-500/20 p-1 rounded-full"><Check className="w-3 h-3 text-emerald-400" /></div>
+                        <span className="text-white text-sm font-medium">Mismos beneficios y garantía</span>
+                    </li>
+                </ul>
+
+                <a 
+                    href={waLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full bg-emerald-500 hover:bg-emerald-400 text-[#020617] font-black py-4 rounded-xl transition shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2 group text-lg relative overflow-hidden"
+                >
+                    <span className="relative z-10 flex items-center gap-2">
+                        PEDIR CBU POR WHATSAPP
+                        <MessageCircle className="w-5 h-5 fill-current" />
+                    </span>
+                    {/* Shine Effect */}
+                    <div className="absolute top-0 -left-[100%] w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 animate-[shimmer_2s_infinite]"></div>
+                </a>
+                
+                <p className="text-center text-[10px] text-slate-500 mt-3">
+                    *Al hacer clic se abrirá un chat para coordinar el pago.
+                </p>
+            </div>
+
         </div>
+
+        {/* Security Footer */}
+        <div className="mt-12 flex justify-center items-center gap-6 opacity-40 grayscale hover:grayscale-0 transition duration-500">
+            <div className="flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-emerald-500" />
+                <span className="text-xs text-slate-300 font-medium">COMPRA 100% SEGURA</span>
+            </div>
+            <div className="w-px h-4 bg-slate-700"></div>
+            <div className="flex items-center gap-2">
+                <span className="text-xs text-slate-300 font-medium">DATOS ENCRIPTADOS (SSL)</span>
+            </div>
+            <div className="w-px h-4 bg-slate-700"></div>
+            <div className="flex items-center gap-2">
+                <span className="text-xs text-slate-300 font-medium">GARANTÍA DE 7 DÍAS</span>
+            </div>
+        </div>
+
       </div>
-      
       <style>{`
         @keyframes shimmer {
             0% { left: -100%; }
