@@ -120,6 +120,8 @@ const Offer: React.FC = () => {
 
                 <a 
                     href={CHECKOUT_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold py-4 rounded-xl transition border border-slate-700 flex items-center justify-center gap-2 group-hover:shadow-lg group-hover:shadow-slate-500/10"
                 >
                     PAGAR CON TARJETA

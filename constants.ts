@@ -2,7 +2,7 @@
 import { BonusItem, Feature, Testimonial, Module, FAQItem } from './types';
 import { AlertTriangle, Leaf, Clock, Heart, ShieldCheck, CheckCircle, Star, XCircle } from 'lucide-react';
 
-// URL de Checkout actualizada
+// URL actualizada para el botón de pago con tarjeta
 export const CHECKOUT_URL = "https://sandietienda.myshopify.com/products/planifica-tu-vida-y-vive-mejor-10-regalos";
 
 export const MAIN_PRODUCT = {
