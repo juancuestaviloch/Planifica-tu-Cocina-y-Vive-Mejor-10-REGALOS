@@ -36,12 +36,12 @@ const DiscountWheel: React.FC = () => {
 
   // Wheel Segments Configuration - FIXED CODES
   const SEGMENTS: Prize[] = [
-    { label: '10% OFF', value: 10, color: '#dcfce7', textColor: '#166534', code: 'Sandie10' },
-    { label: '15% OFF', value: 15, color: '#fef9c3', textColor: '#854d0e', code: 'Sandiee15%' },
-    { label: '10% OFF', value: 10, color: '#dcfce7', textColor: '#166534', code: 'Sandie10' },
-    { label: '20% OFF', value: 20, color: '#fee2e2', textColor: '#991b1b', code: 'Sandie20%' },
-    { label: '10% OFF', value: 10, color: '#dcfce7', textColor: '#166534', code: 'Sandie10' },
-    { label: '15% OFF', value: 15, color: '#fef9c3', textColor: '#854d0e', code: 'Sandiee15%' },
+    { label: '10% OFF', value: 10, color: '#dcfce7', textColor: '#166534', code: 'SANDIE10%' },
+    { label: '15% OFF', value: 15, color: '#fef9c3', textColor: '#854d0e', code: 'SANDIE15%' },
+    { label: '10% OFF', value: 10, color: '#dcfce7', textColor: '#166534', code: 'SANDIE10%' },
+    { label: '20% OFF', value: 20, color: '#fee2e2', textColor: '#991b1b', code: 'SANDIE20%' },
+    { label: '10% OFF', value: 10, color: '#dcfce7', textColor: '#166534', code: 'SANDIE10%' },
+    { label: '15% OFF', value: 15, color: '#fef9c3', textColor: '#854d0e', code: 'SANDIE15%' },
   ];
 
   useEffect(() => {
@@ -99,11 +99,8 @@ const DiscountWheel: React.FC = () => {
   };
 
   const determinePrize = (): number => {
-    const rand = Math.random() * 100;
-    let winningValue = 10;
-    if (rand < 90) winningValue = 10;
-    else if (rand < 99) winningValue = 15;
-    else winningValue = 20;
+    // RIGGED: 100% probability for 10%
+    const winningValue = 10;
 
     const matchingIndices = SEGMENTS.map((seg, idx) => seg.value === winningValue ? idx : -1).filter(idx => idx !== -1);
     const winningIndex = matchingIndices[Math.floor(Math.random() * matchingIndices.length)];
@@ -244,7 +241,7 @@ const DiscountWheel: React.FC = () => {
                         GIRAR AHORA <ArrowRight className="w-5 h-5" />
                         </button>
                         <p className="text-[10px] text-gray-400 mt-2">
-                        *Probabilidades: 10% (90%), 15% (9%), 20% (1%).
+                        *Probabilidades: ¡Todos ganan algo!
                         </p>
                     </div>
                     </form>
